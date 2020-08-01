@@ -1,0 +1,31 @@
+{
+  "name": "profile_project_repo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "http-errors": "^1.8.0",
+    "json-server": "^0.16.1",
+    "mongoose": "^5.9.25",
+    "mongoose-unique-validator": "^2.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "backend": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sahilrajput03/profile_project_repo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sahilrajput03/profile_project_repo/issues"
+  },
+  "homepage": "https://github.com/sahilrajput03/profile_project_repo#readme"
+}
