@@ -1,23 +1,34 @@
-const express = require("express");
-
-require("express-async-errors");
-require("./database/db");
-
-const cors = require("cors");
-const contactRouter = require("./routes/contacts");
-const specificContactRouter = require("./routes/specificContacts");
-const middleware = require("./utils/middleware");
+const config = require('./utils/config');
+const express = require('express');
+require('express-async-errors');
+const cors = require('cors');
+const middleware = require('./utils/middleware');
+const contactRouter = require('./controllers/contacts');
+const mongoose = require('mongoose');
 
 const app = express();
 
-app.use(express.static("build"));
+const { MONGODB_URI: url } = config;
+
+mongoose
+  .connect(url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((error) =>
+    console.error(`Error while connecting to MongoDB: `, error.message)
+  );
+
+app.use(express.static('build'));
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/contacts", contactRouter);
-app.use("/api/contacts", specificContactRouter);
+app.use('/api/contacts', contactRouter);
 
-app.use(middleware.unknownEndPointHandler);
+app.use(middleware.unknownEndpointHandler);
 app.use(middleware.errorHandler);
 
 module.exports = app;

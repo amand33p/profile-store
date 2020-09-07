@@ -1,6 +1,6 @@
-const http = require("http");
-const app = require("./app"); // the actual Express application
-const { PORT } = require("./utils/config");
+const app = require('./app');
+const http = require('http');
+const { PORT } = require('./utils/config');
 
 const server = http.createServer(app);
 
