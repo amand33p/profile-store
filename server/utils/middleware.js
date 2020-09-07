@@ -4,6 +4,7 @@ const { SECRET } = require('../utils/config');
 const auth = (req, res, next) => {
   try {
     const token = req.header('x-auth-token');
+
     if (!token) {
       return res
         .status(401)
@@ -26,18 +27,18 @@ const auth = (req, res, next) => {
 };
 
 const unknownEndpointHandler = (_req, res) => {
-  res.status(404).send({ error: 'unknown endpoint' });
+  res.status(404).send({ error: 'Unknown endpoint.' });
 };
 
 const errorHandler = (error, _req, res, next) => {
   console.error(error.message);
 
   if (error.name === 'CastError' && error.kind === 'ObjectId') {
-    return res.status(400).send({ error: 'malformatted id' });
+    return res.status(400).send({ error: 'Malformatted ID.' });
   } else if (error.name === 'ValidationError') {
     return res.status(400).send({ error: error.message });
   } else if (error.name === 'JsonWebTokenError') {
-    return res.status(401).send({ error: 'invalid token' });
+    return res.status(401).send({ error: 'Invalid token.' });
   }
 
   next(error);
