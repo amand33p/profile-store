@@ -11,19 +11,13 @@ router.get('/', async (_req, res) => {
 router.post('/', async (req, res) => {
   const { name, contacts } = req.body;
 
-  if (!Array.isArray(contacts) || contacts.length === 0) {
-    return res.status(401).send({
-      error: 'Contacts field needs to be an array with atleast 1 element.',
-    });
-  }
-
-  if (!contacts[0].url || !validator.isURL(contacts[0].url)) {
+  if (!contacts.url || !validator.isURL(contacts.url)) {
     return res
       .status(401)
       .send({ error: 'Valid URL is required for link field.' });
   }
 
-  if (!site) {
+  if (!contacts.site) {
     return res.status(401).send({ error: 'Site name is required.' });
   }
 
