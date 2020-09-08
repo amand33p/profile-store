@@ -1,14 +1,15 @@
 const router = require('express').Router();
 const Contact = require('../models/contact');
+const User = require('../models/user');
 const validator = require('validator');
-const createError = require('http-errors');
+const { auth } = require('../utils/middleware');
 
-router.get('/', async (_req, res) => {
-  const allContacts = await Contact.find({});
+router.get('/', auth, async (req, res) => {
+  const allContacts = await Contact.find({ user: req.user });
   res.json(allContacts);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const { name, contacts } = req.body;
 
   if (!contacts.url || !validator.isURL(contacts.url)) {
@@ -21,19 +22,31 @@ router.post('/', async (req, res) => {
     return res.status(401).send({ error: 'Site name is required.' });
   }
 
+  const user = await User.findById(req.user);
+
+  if (!user) {
+    return res.status(404).send({ error: 'User does not exist in database.' });
+  }
+
   const newPerson = new Contact({
     name,
     contacts,
+    user: user._id,
   });
 
   const savedPerson = await newPerson.save();
   return res.status(201).json(savedPerson);
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   const { id } = req.params;
 
+  const user = await User.findById(req.user);
   const person = await Contact.findById(id);
+
+  if (!user) {
+    return res.status(404).send({ error: 'User does not exist in database.' });
+  }
 
   if (!person) {
     return res
@@ -41,11 +54,46 @@ router.delete('/:id', async (req, res) => {
       .send({ error: `Contact with ID: ${id} does not exist in database.` });
   }
 
+  if (person.user.toString() !== user._id.toString()) {
+    return res.status(401).send({ error: 'Access is denied.' });
+  }
+
   await Contact.findByIdAndDelete(id);
   res.status(204).end();
 });
 
-router.post('/:id/url', async (req, res) => {
+router.patch('/:id/name_dp', auth, async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+
+  if (!name) {
+    return res.status(401).send({ error: 'Name field is required.' });
+  }
+
+  const user = await User.findById(req.user);
+  const person = await Contact.findById(id);
+
+  if (!user) {
+    return res.status(404).send({ error: 'User does not exist in database.' });
+  }
+
+  if (!person) {
+    return res
+      .status(404)
+      .send({ error: `Contact with ID: ${id} does not exist in database.` });
+  }
+
+  if (person.user.toString() !== user._id.toString()) {
+    return res.status(401).send({ error: 'Access is denied.' });
+  }
+
+  person.name = name;
+
+  await person.save();
+  res.status(202).json(person);
+});
+
+router.post('/:id/url', auth, async (req, res) => {
   const { id } = req.params;
   const { url, site } = req.body;
 
@@ -59,12 +107,21 @@ router.post('/:id/url', async (req, res) => {
       .send({ error: 'Valid URL is required for link field.' });
   }
 
+  const user = await User.findById(req.user);
   const person = await Contact.findById(id);
+
+  if (!user) {
+    return res.status(404).send({ error: 'User does not exist in database.' });
+  }
 
   if (!person) {
     return res
       .status(404)
       .send({ error: `Contact with ID: ${id} does not exist in database.` });
+  }
+
+  if (person.user.toString() !== user._id.toString()) {
+    return res.status(401).send({ error: 'Access is denied.' });
   }
 
   const newContact = {
@@ -78,7 +135,7 @@ router.post('/:id/url', async (req, res) => {
   res.status(201).json(savedPerson);
 });
 
-router.patch('/:id/url/:urlId', async (req, res) => {
+router.patch('/:id/url/:urlId', auth, async (req, res) => {
   const { id } = req.params;
   const { urlId } = req.params;
   const { url, site } = req.body;
@@ -93,12 +150,21 @@ router.patch('/:id/url/:urlId', async (req, res) => {
       .send({ error: 'Valid URL is required for link field.' });
   }
 
+  const user = await User.findById(req.user);
   const person = await Contact.findById(id);
+
+  if (!user) {
+    return res.status(404).send({ error: 'User does not exist in database.' });
+  }
 
   if (!person) {
     return res
       .status(404)
       .send({ error: `Contact with ID: ${id} does not exist in database.` });
+  }
+
+  if (person.user.toString() !== user._id.toString()) {
+    return res.status(401).send({ error: 'Access is denied.' });
   }
 
   const urlToUpdate = person.contacts.find((c) => c.id === urlId);
@@ -119,16 +185,25 @@ router.patch('/:id/url/:urlId', async (req, res) => {
   res.status(202).json(updatedUrl);
 });
 
-router.delete('/:id/url/:urlId', async (req, res) => {
+router.delete('/:id/url/:urlId', auth, async (req, res) => {
   const { id } = req.params;
   const { urlId } = req.params;
 
+  const user = await User.findById(req.user);
   const person = await Contact.findById(id);
+
+  if (!user) {
+    return res.status(404).send({ error: 'User does not exist in database.' });
+  }
 
   if (!person) {
     return res
       .status(404)
       .send({ error: `Contact with ID: ${id} does not exist in database.` });
+  }
+
+  if (person.user.toString() !== user._id.toString()) {
+    return res.status(401).send({ error: 'Access is denied.' });
   }
 
   person.contacts = person.contacts.filter((c) => c.id !== urlId);

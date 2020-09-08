@@ -21,6 +21,10 @@ const contactSchema = new mongoose.Schema({
     trim: true,
   },
   contacts: [sitesSchema],
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
 });
 
 contactSchema.plugin(uniqueValidator);

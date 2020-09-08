@@ -20,6 +20,7 @@ const auth = (req, res, next) => {
     }
 
     req.user = decodedToken.id;
+    
     next();
   } catch (error) {
     res.status(500).send({ error: error.message });
