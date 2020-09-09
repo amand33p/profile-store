@@ -3,6 +3,7 @@ const Contact = require('../models/contact');
 const User = require('../models/user');
 const validator = require('validator');
 const { auth } = require('../utils/middleware');
+const { cloudinary } = require('../utils/config');
 
 router.get('/', auth, async (req, res) => {
   const allContacts = await Contact.find({ user: req.user });
@@ -10,7 +11,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 router.post('/', auth, async (req, res) => {
-  const { name, contacts } = req.body;
+  const { name, contacts, displayPicture } = req.body;
 
   if (!contacts.url || !validator.isURL(contacts.url)) {
     return res
@@ -28,10 +29,34 @@ router.post('/', auth, async (req, res) => {
     return res.status(404).send({ error: 'User does not exist in database.' });
   }
 
+  let displayPictureObj = {
+    link: 'null',
+    public_id: 'null',
+  };
+
+  if (displayPicture) {
+    const uploadedImage = await cloudinary.uploader.upload(
+      displayPicture,
+      {
+        upload_preset: 'profile-store',
+      },
+      (error) => {
+        if (error) return res.status(401).send({ error: error.message });
+      }
+    );
+
+    displayPictureObj = {
+      exists: true,
+      link: uploadedImage.url,
+      public_id: uploadedImage.public_id,
+    };
+  }
+
   const newPerson = new Contact({
     name,
     contacts,
     user: user._id,
+    displayPicture: displayPictureObj,
   });
 
   const savedPerson = await newPerson.save();
@@ -58,13 +83,22 @@ router.delete('/:id', auth, async (req, res) => {
     return res.status(401).send({ error: 'Access is denied.' });
   }
 
+  if (person.displayPicture.exists === true) {
+    await cloudinary.uploader.destroy(
+      person.displayPicture.public_id,
+      (error) => {
+        if (error) res.status(401).send({ error: error.message });
+      }
+    );
+  }
+
   await Contact.findByIdAndDelete(id);
   res.status(204).end();
 });
 
 router.patch('/:id/name_dp', auth, async (req, res) => {
   const { id } = req.params;
-  const { name } = req.body;
+  const { name, displayPicture } = req.body;
 
   if (!name) {
     return res.status(401).send({ error: 'Name field is required.' });
@@ -85,6 +119,31 @@ router.patch('/:id/name_dp', auth, async (req, res) => {
 
   if (person.user.toString() !== user._id.toString()) {
     return res.status(401).send({ error: 'Access is denied.' });
+  }
+
+  if (displayPicture) {
+    const uploadedImage = await cloudinary.uploader.upload(
+      displayPicture,
+      {
+        upload_preset: 'profile-store',
+      },
+      (error) => {
+        if (error) return res.status(401).send({ error: error.message });
+      }
+    );
+
+    await cloudinary.uploader.destroy(
+      person.displayPicture.public_id,
+      (error) => {
+        if (error) res.status(401).send({ error: error.message });
+      }
+    );
+
+    person.displayPicture = {
+      exists: true,
+      link: uploadedImage.url,
+      public_id: uploadedImage.public_id,
+    };
   }
 
   person.name = name;
