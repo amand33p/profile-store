@@ -2,6 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import AddContactForm from '../components/AddContactForm';
 import ContactsDisplay from '../components/ContactsDisplay';
+import RegisterForm from '../components/RegisterForm';
+import LoginForm from '../components/LoginForm';
 
 const Routes = ({
   contacts,
@@ -26,6 +28,12 @@ const Routes = ({
           handleOptionAddition={handleOptionAddition}
           notify={notify}
         />
+      </Route>
+      <Route exact path="/register">
+        <RegisterForm />
+      </Route>
+      <Route exact path="/login">
+        <LoginForm />
       </Route>
     </Switch>
   );

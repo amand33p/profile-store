@@ -29,10 +29,11 @@ router.post('/', auth, async (req, res) => {
     return res.status(404).send({ error: 'User does not exist in database.' });
   }
 
-  let displayPictureObj = {
-    link: 'null',
-    public_id: 'null',
-  };
+  const newPerson = new Contact({
+    name,
+    contacts,
+    user: user._id,
+  });
 
   if (displayPicture) {
     const uploadedImage = await cloudinary.uploader.upload(
@@ -45,19 +46,12 @@ router.post('/', auth, async (req, res) => {
       }
     );
 
-    displayPictureObj = {
+    newPerson.displayPicture = {
       exists: true,
       link: uploadedImage.url,
       public_id: uploadedImage.public_id,
     };
   }
-
-  const newPerson = new Contact({
-    name,
-    contacts,
-    user: user._id,
-    displayPicture: displayPictureObj,
-  });
 
   const savedPerson = await newPerson.save();
   return res.status(201).json(savedPerson);

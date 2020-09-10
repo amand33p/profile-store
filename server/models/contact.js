@@ -1,47 +1,47 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
-const urlSchema = new mongoose.Schema({
-  url: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  site: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-});
-
-const DpSchema = new mongoose.Schema({
-  exists: {
-    type: Boolean,
-    required: true,
-    default: 'false',
-  },
-  link: {
-    type: String,
-    required: true,
-  },
-  public_id: {
-    type: String,
-    required: true,
-  },
-});
-
 const contactSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
     trim: true,
   },
-  contacts: [urlSchema],
+  contacts: [
+    {
+      url: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+      site: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+    },
+  ],
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
-  displayPicture: DpSchema,
+  displayPicture: {
+    exists: {
+      type: Boolean,
+      required: true,
+      default: 'false',
+    },
+    link: {
+      type: String,
+      required: true,
+      default: 'null',
+    },
+    public_id: {
+      type: String,
+      required: true,
+      default: 'null',
+    },
+  },
 });
 
 contactSchema.plugin(uniqueValidator);

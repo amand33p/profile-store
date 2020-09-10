@@ -17,9 +17,16 @@ const App = () => {
   ]);
 
   useEffect(() => {
-    contactService.getAll().then((contacts) => {
-      setContacts(contacts);
-    });
+    const getAllContacts = async () => {
+      try {
+        const contacts = await contactService.getAll();
+        setContacts(contacts);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getAllContacts();
   }, []);
 
   let timeoutId = null;

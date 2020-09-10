@@ -1,28 +1,33 @@
 import React from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
+import { Link, useLocation } from 'react-router-dom';
 
-const NavBar = ({ page, setPage }) => {
-  const handleNav = (e, data) => {
-    setPage(data.name);
-  };
+const NavBar = () => {
+  const location = useLocation();
 
   return (
     <Menu color="teal">
       <Menu.Item header>
         <Icon name="user circle outline" />
-        Profile Finder
+        Profile Store
       </Menu.Item>
       <Menu.Item
-        as="a"
+        as={Link}
         name="Home"
-        active={page === 'Home'}
-        onClick={handleNav}
+        to="/"
+        active={location.pathname === '/'}
       />
       <Menu.Item
-        as="a"
-        name="About"
-        active={page === 'About'}
-        onClick={handleNav}
+        as={Link}
+        name="Register"
+        to="/register"
+        active={location.pathname === '/register'}
+      />
+      <Menu.Item
+        as={Link}
+        name="Login"
+        to="/login"
+        active={location.pathname === '/login'}
       />
     </Menu>
   );
