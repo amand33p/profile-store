@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
-import { Form, Button, Icon, Header } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import contactService from '../services/contacts';
+import authService from '../services/auth';
+import storageService from '../utils/localStorageHelpers';
 
-const LoginForm = () => {
+import { Form, Button, Icon, Header } from 'semantic-ui-react';
+
+const LoginForm = ({ setUser }) => {
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
   });
+
+  const history = useHistory();
 
   const { email, password } = credentials;
 
@@ -14,9 +20,17 @@ const LoginForm = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('logged in', email, password);
+    try {
+      const user = await authService.login(credentials);
+      setUser(user);
+      contactService.setToken(user.token);
+      storageService.saveUser(user);
+      history.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -29,7 +43,7 @@ const LoginForm = () => {
         name="email"
         value={email}
         onChange={handleOnChange}
-        icon="mail"
+        icon="at"
         iconPosition="left"
       />
       <Form.Input

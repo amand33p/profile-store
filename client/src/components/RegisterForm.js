@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { Form, Button, Icon, Header } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import contactService from '../services/contacts';
+import authService from '../services/auth';
+import storageService from '../utils/localStorageHelpers';
 
-const RegisterForm = () => {
+import { Form, Button, Icon, Header } from 'semantic-ui-react';
+
+const RegisterForm = ({ setUser }) => {
   const [userDetails, setUserDetails] = useState({
     displayName: '',
     email: '',
@@ -10,16 +14,26 @@ const RegisterForm = () => {
   });
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const history = useHistory();
+
   const { displayName, email, password } = userDetails;
 
   const handleOnChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     if (password !== confirmPassword) return console.log('confirm pass failed');
     e.preventDefault();
-    console.log('registred', displayName, email, password);
+    try {
+      const user = await authService.register(userDetails);
+      setUser(user);
+      contactService.setToken(user.token);
+      storageService.saveUser(user);
+      history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -43,7 +57,7 @@ const RegisterForm = () => {
         name="email"
         value={email}
         onChange={handleOnChange}
-        icon="mail"
+        icon="at"
         iconPosition="left"
       />
       <Form.Input

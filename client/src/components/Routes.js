@@ -1,13 +1,16 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import AddContactForm from '../components/AddContactForm';
 import ContactsDisplay from '../components/ContactsDisplay';
 import RegisterForm from '../components/RegisterForm';
 import LoginForm from '../components/LoginForm';
+import storageService from '../utils/localStorageHelpers';
 
 const Routes = ({
   contacts,
   setContacts,
+  user,
+  setUser,
   options,
   handleOptionAddition,
   notify,
@@ -15,25 +18,31 @@ const Routes = ({
   return (
     <Switch>
       <Route exact path="/">
-        <AddContactForm
-          setContacts={setContacts}
-          options={options}
-          handleOptionAddition={handleOptionAddition}
-          notify={notify}
-        />
-        <ContactsDisplay
-          contacts={contacts}
-          setContacts={setContacts}
-          options={options}
-          handleOptionAddition={handleOptionAddition}
-          notify={notify}
-        />
+        {storageService.loadUser() || user ? (
+          <>
+            <AddContactForm
+              setContacts={setContacts}
+              options={options}
+              handleOptionAddition={handleOptionAddition}
+              notify={notify}
+            />
+            <ContactsDisplay
+              contacts={contacts}
+              setContacts={setContacts}
+              options={options}
+              handleOptionAddition={handleOptionAddition}
+              notify={notify}
+            />
+          </>
+        ) : (
+          <Redirect to="login" />
+        )}
       </Route>
       <Route exact path="/register">
-        <RegisterForm />
+        <RegisterForm setUser={setUser} />
       </Route>
       <Route exact path="/login">
-        <LoginForm />
+        <LoginForm setUser={setUser} />
       </Route>
     </Switch>
   );

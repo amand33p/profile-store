@@ -3,18 +3,25 @@ import NavBar from './components/NavBar';
 import Notification from './components/Notification';
 import Routes from './components/Routes';
 import contactService from './services/contacts';
+import optionsArray from './utils/optionsArray';
+import storageService from './utils/localStorageHelpers';
+
 import { Container } from 'semantic-ui-react';
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
   const [notification, setNotification] = useState(null);
-  const [options, setOptions] = useState([
-    { key: 'fb', text: 'Facebook', value: 'Facebook', icon: 'facebook' },
-    { key: 'ig', text: 'Instagram', value: 'Instagram', icon: 'instagram' },
-    { key: 'tw', text: 'Twitter', value: 'Twitter', icon: 'twitter' },
-    { key: 'gh', text: 'Github', value: 'Github', icon: 'github' },
-    { key: 'yt', text: 'Youtube', value: 'Youtube', icon: 'youtube' },
-  ]);
+  const [user, setUser] = useState(null);
+  const [options, setOptions] = useState(optionsArray);
+
+  useEffect(() => {
+    const loggedUser = storageService.loadUser();
+
+    if (loggedUser) {
+      setUser(loggedUser);
+      contactService.setToken(loggedUser.token);
+    }
+  }, []);
 
   useEffect(() => {
     const getAllContacts = async () => {
@@ -26,8 +33,10 @@ const App = () => {
       }
     };
 
-    getAllContacts();
-  }, []);
+    if (user) {
+      getAllContacts();
+    }
+  }, [user]);
 
   let timeoutId = null;
 
@@ -53,11 +62,13 @@ const App = () => {
 
   return (
     <Container>
-      <NavBar />
+      <NavBar user={user} setUser={setUser} />
       <Notification notification={notification} />
       <Routes
         contacts={contacts}
         setContacts={setContacts}
+        user={user}
+        setUser={setUser}
         options={options}
         handleOptionAddition={handleOptionAddition}
         notify={notify}

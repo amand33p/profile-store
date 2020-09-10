@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import contactService from '../services/contacts';
-import { Form, Button, Icon } from 'semantic-ui-react';
+
+import { Form, Button, Icon, Label } from 'semantic-ui-react';
 
 const AddContactForm = ({
   setContacts,
@@ -48,24 +49,33 @@ const AddContactForm = ({
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          icon="user secret"
+          iconPosition="left"
         />
         <Form.Input
           required
-          placeholder="For example, https://www.facebook.com"
+          placeholder="For ex, https://www.facebook.com"
           type="url"
           label="URL"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
+          icon="linkify"
+          iconPosition="left"
         />
+
         <Form.Select
           required
           value={site}
           options={options}
-          label="Choose site name"
+          label="Site"
           allowAdditions
           selection
           search
-          placeholder="Select a site"
+          placeholder={
+            <div>
+              <Icon name="globe" color="black" /> Select a site
+            </div>
+          }
           onAddItem={handleOptionAddition}
           onChange={(e, data) => setSite(data.value)}
         />
