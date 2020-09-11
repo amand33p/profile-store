@@ -1,7 +1,10 @@
 import React from 'react';
 import LinkFormModal from './LinkFormModal';
 import DeleteModal from './DeleteModal';
-import { Card, List } from 'semantic-ui-react';
+import DisplayPictureModal from './DisplayPictureModal';
+import { siteIconsArray, randomColor } from '../utils/arraysAndFuncs';
+
+import { Header, Card, List, Label } from 'semantic-ui-react';
 
 const ContactCard = ({
   contact,
@@ -11,22 +14,24 @@ const ContactCard = ({
   handleOptionAddition,
   notify,
 }) => {
-  const siteIcons = [
-    'facebook',
-    'github',
-    'youtube',
-    'twitter',
-    'instagram',
-    'blogger',
-    'linkedin',
-    'reddit',
-  ];
-
   return (
     <Card fluid>
-      <Card.Content style={{ justifyContent: 'center' }}>
-        <h2>
-          {contact.name}
+      <Card.Content>
+        <Header as="h2">
+          {contact.displayPicture.exists ? (
+            <DisplayPictureModal imageLink={contact.displayPicture.link} />
+          ) : (
+            <Label
+              circular
+              color={randomColor()}
+              size="massive"
+              className="avatar-label"
+            >
+              {contact.name[0]}
+            </Label>
+          )}
+          <span className="name-header">{contact.name}</span>
+
           <DeleteModal
             type="contact"
             contact={contact}
@@ -35,7 +40,7 @@ const ContactCard = ({
             id={contact.id}
             notify={notify}
           />
-        </h2>
+        </Header>
       </Card.Content>
       <Card.Content>
         <List divided relaxed animated>
@@ -43,7 +48,7 @@ const ContactCard = ({
             <List.Item key={c + c.id}>
               <List.Icon
                 name={
-                  siteIcons.includes(c.site.toLowerCase())
+                  siteIconsArray.includes(c.site.toLowerCase())
                     ? c.site.toLowerCase()
                     : 'add circle'
                 }

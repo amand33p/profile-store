@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import contactService from '../services/contacts';
 
-import { Form, Button, Icon, Label } from 'semantic-ui-react';
+import { Form, Button, Icon } from 'semantic-ui-react';
 
 const AddContactForm = ({
   setContacts,

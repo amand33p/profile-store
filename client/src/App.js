@@ -3,7 +3,7 @@ import NavBar from './components/NavBar';
 import Notification from './components/Notification';
 import Routes from './components/Routes';
 import contactService from './services/contacts';
-import optionsArray from './utils/optionsArray';
+import { optionsArray } from './utils/arraysAndFuncs';
 import storageService from './utils/localStorageHelpers';
 
 import { Container } from 'semantic-ui-react';
