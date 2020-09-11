@@ -60,14 +60,13 @@ const ContactCard = ({
                     target="_blank"
                     rel="noopener noreferrer"
                     href={
-                      c.url.startsWith('https://' || 'http://')
-                        ? `${c.url}`
-                        : `https://${c.url}`
+                      c.url.startsWith('http') ? `${c.url}` : `https://${c.url}`
                     }
                   >
-                    {c.url}
+                    {c.url.startsWith('http') ? c.url.split('//')[1] : c.url}
                   </a>
                   <LinkFormModal
+                    type="edit"
                     id={contact.id}
                     urlId={c.id}
                     contacts={contacts}
@@ -76,7 +75,6 @@ const ContactCard = ({
                     handleOptionAddition={handleOptionAddition}
                     urlToEdit={c.url}
                     siteToEdit={c.site}
-                    type="edit"
                     notify={notify}
                   />
                   <DeleteModal
@@ -97,12 +95,12 @@ const ContactCard = ({
           ))}
         </List>
         <LinkFormModal
+          type="add"
           id={contact.id}
           contacts={contacts}
           setContacts={setContacts}
           options={options}
           handleOptionAddition={handleOptionAddition}
-          type="add"
           notify={notify}
         />
       </Card.Content>

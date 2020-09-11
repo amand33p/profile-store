@@ -29,6 +29,15 @@ const deleteContact = async (id) => {
   return response.data;
 };
 
+const editContact = async (id, contactObj) => {
+  const response = await axios.patch(
+    `${baseUrl}/${id}/name_dp`,
+    contactObj,
+    setConfig()
+  );
+  return response.data;
+};
+
 const addLink = async (id, linkObj) => {
   const response = await axios.post(
     `${baseUrl}/${id}/url`,
@@ -60,6 +69,7 @@ export default {
   getAll,
   addNew,
   deleteContact,
+  editContact,
   addLink,
   editLink,
   deleteLink,

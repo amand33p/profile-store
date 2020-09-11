@@ -22,6 +22,17 @@ a:hover {
   filter: brightness(60%);
 }
 
+.nav-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-logo {
+  font-size: 1.1em;
+  margin-bottom: 0.2em;
+  align-self: flex-start;
+}
+
 .name-header {
   margin-left: 8px;
 }

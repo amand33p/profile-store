@@ -15,7 +15,7 @@ const DeleteModal = ({
 }) => {
   const [open, setOpen] = useState(false);
 
-  const handleContactDelete = async (id) => {
+  const handleContactDelete = async () => {
     try {
       await contactService.deleteContact(id);
       setContacts(contacts.filter((c) => c.id !== id));
@@ -26,12 +26,14 @@ const DeleteModal = ({
     }
   };
 
-  const handleLinkDelete = async (id, urlId, urlLink, urlName) => {
+  const handleLinkDelete = async () => {
     const targetContact = contacts.find((c) => c.id === id);
     const updatedContactsKey = targetContact.contacts.filter(
       (t) => t.id !== urlId
     );
     const updatedContact = { ...targetContact, contacts: updatedContactsKey };
+
+    console.log(id, urlId);
 
     try {
       await contactService.deleteLink(id, urlId);
@@ -76,11 +78,7 @@ const DeleteModal = ({
         </Button>
         <Button
           color="green"
-          onClick={() =>
-            isTypeContact
-              ? handleContactDelete(id)
-              : handleLinkDelete(id, urlId, urlLink, urlName)
-          }
+          onClick={isTypeContact ? handleContactDelete : handleLinkDelete}
         >
           <Icon name="checkmark" /> Yes
         </Button>

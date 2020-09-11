@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import contactService from '../services/contacts';
-import { Modal, Header, Form, Button } from 'semantic-ui-react';
+import { Modal, Header, Form, Button, Icon } from 'semantic-ui-react';
 
 const LinkFormModal = ({
   id,
@@ -14,10 +14,8 @@ const LinkFormModal = ({
   siteToEdit,
   notify,
 }) => {
-  const [url, setUrl] = useState('');
-  const [site, setSite] = useState('');
-  const [editUrl, setEditUrl] = useState(urlToEdit);
-  const [editSite, setEditSite] = useState(siteToEdit);
+  const [url, setUrl] = useState(urlToEdit ? urlToEdit : '');
+  const [site, setSite] = useState(siteToEdit ? siteToEdit : '');
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleOpen = () => {
@@ -28,13 +26,13 @@ const LinkFormModal = ({
     setModalOpen(false);
   };
 
+  const newObject = {
+    url,
+    site,
+  };
+
   const addNewLink = async (e) => {
     e.preventDefault();
-
-    const newObject = {
-      url,
-      site,
-    };
 
     try {
       const returnedObject = await contactService.addLink(id, newObject);
@@ -53,11 +51,6 @@ const LinkFormModal = ({
 
   const editLink = async (e) => {
     e.preventDefault();
-
-    const newObject = {
-      url: editUrl,
-      site: editSite,
-    };
 
     const targetContact = contacts.find((c) => c.id === id);
 
@@ -113,26 +106,28 @@ const LinkFormModal = ({
         <Form onSubmit={isTypeEdit ? editLink : addNewLink}>
           <Form.Input
             required
-            placeholder="For example, https://www.facebook.com"
-            type="url"
+            placeholder="For ex, https://www.facebook.com"
+            type="text"
             label="URL"
-            value={isTypeEdit ? editUrl : url}
-            onChange={(e) =>
-              isTypeEdit ? setEditUrl(e.target.value) : setUrl(e.target.value)
-            }
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            icon="linkify"
+            iconPosition="left"
           />
           <Form.Select
             required
-            value={isTypeEdit ? editSite : site}
+            value={site}
             options={options}
-            label="Choose site name"
+            label="Site"
             allowAdditions
             selection
             search
-            placeholder="Select a site"
-            onChange={(e, data) =>
-              isTypeEdit ? setEditSite(data.value) : setSite(data.value)
+            placeholder={
+              <div>
+                <Icon name="globe" color="black" /> Select a site
+              </div>
             }
+            onChange={(e, data) => setSite(data.value)}
             onAddItem={handleOptionAddition}
           />
           <Button type="submit" color="green" floated="right">

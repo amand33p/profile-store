@@ -1,8 +1,9 @@
 import React from 'react';
-import { Menu, Icon, Dropdown } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
 import storageService from '../utils/localStorageHelpers';
 import { useMediaQuery } from 'react-responsive';
+
+import { Menu, Icon, Dropdown } from 'semantic-ui-react';
 
 const NavBar = ({ user, setUser }) => {
   const location = useLocation();
@@ -61,10 +62,22 @@ const NavBar = ({ user, setUser }) => {
   };
 
   return (
-    <Menu color="teal" size="large" borderless={isMobile ? true : false}>
-      <Menu.Item header>
-        <Icon name="user circle outline" color="teal" />
-        Profile Store
+    <Menu color="teal" borderless={isMobile ? true : false}>
+      <Menu.Item header className="nav-title">
+        <div className="nav-logo">
+          <Icon name="user circle outline" color="teal" />
+          Profile Store
+        </div>
+        <small>
+          Made with <Icon name="heart" color="pink" /> by{' '}
+          <a
+            href="https://github.com/amand33p"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            amand33p
+          </a>
+        </small>
       </Menu.Item>
       <Menu.Menu position="right">
         {user ? <>{logoutMenu()}</> : <>{loginRegisterMenu()}</>}

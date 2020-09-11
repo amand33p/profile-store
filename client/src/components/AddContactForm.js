@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import contactService from '../services/contacts';
-
-import { Form, Button, Icon } from 'semantic-ui-react';
+import { Form, Button, Icon, Message } from 'semantic-ui-react';
 
 const AddContactForm = ({
   setContacts,
@@ -55,7 +54,7 @@ const AddContactForm = ({
         <Form.Input
           required
           placeholder="For ex, https://www.facebook.com"
-          type="url"
+          type="text"
           label="URL"
           value={url}
           onChange={(e) => setUrl(e.target.value)}

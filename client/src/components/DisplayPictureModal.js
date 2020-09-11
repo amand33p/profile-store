@@ -21,7 +21,7 @@ const DisplayPictureModal = ({ imageLink }) => {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
-      <Header icon="address book" content="Display Picture Preview" />
+      <Header icon="picture" content="Preview: Display Picture " />
       <Modal.Content>
         <Image
           src={imageLink}
