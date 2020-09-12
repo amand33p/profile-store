@@ -61,7 +61,7 @@ const App = () => {
   };
 
   return (
-    <Container>
+    <Container className="container">
       <NavBar user={user} setUser={setUser} />
       <Notification notification={notification} />
       <Routes

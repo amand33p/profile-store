@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FormError from './FormError';
 import contactService from '../services/contacts';
 import { useMediaQuery } from 'react-responsive';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
@@ -15,17 +16,29 @@ const DeleteModal = ({
   notify,
 }) => {
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const handleContactDelete = async () => {
     try {
+      setIsLoading(true);
       await contactService.deleteContact(id);
       setContacts(contacts.filter((c) => c.id !== id));
+      setIsLoading(false);
+      setError(null);
+
       notify(`Contact '${contact.name}' deleted!`, 'green');
-    } catch (error) {
-      console.error(error.message);
-      notify(`${error.message}`, 'red');
+    } catch (err) {
+      setIsLoading(false);
+      const errRes = err.response.data;
+
+      if (errRes && errRes.error) {
+        return setError(errRes.error);
+      } else {
+        return setError(err.message);
+      }
     }
   };
 
@@ -36,15 +49,23 @@ const DeleteModal = ({
     );
     const updatedContact = { ...targetContact, contacts: updatedContactsKey };
 
-    console.log(id, urlId);
-
     try {
+      setIsLoading(true);
       await contactService.deleteLink(id, urlId);
       setContacts(contacts.map((c) => (c.id !== id ? c : updatedContact)));
+      setIsLoading(false);
+      setError(null);
+
       notify(`${urlName} link '${urlLink}' deleted!`, 'green');
-    } catch (error) {
-      console.error(error.message);
-      notify(`${error.message}`, 'red');
+    } catch (err) {
+      setIsLoading(false);
+      const errRes = err.response.data;
+
+      if (errRes && errRes.error) {
+        return setError(errRes.error);
+      } else {
+        return setError(err.message);
+      }
     }
   };
 
@@ -71,6 +92,7 @@ const DeleteModal = ({
       onOpen={() => setOpen(true)}
     >
       <Header icon="trash alternate" content="Confirm Delete" />
+      {error && <FormError message={error} setError={setError} />}
       <Modal.Content>
         <p>
           {isTypeContact
@@ -85,6 +107,7 @@ const DeleteModal = ({
         <Button
           color="green"
           onClick={isTypeContact ? handleContactDelete : handleLinkDelete}
+          loading={isLoading}
         >
           <Icon name="checkmark" /> Yes
         </Button>

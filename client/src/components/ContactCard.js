@@ -60,7 +60,7 @@ const ContactCard = ({
                 name={
                   siteIconsArray.includes(c.site.toLowerCase())
                     ? c.site.toLowerCase()
-                    : 'add circle'
+                    : 'globe'
                 }
                 color="black"
               />

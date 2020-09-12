@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FormError from './FormError';
 import contactService from '../services/contacts';
 import { useMediaQuery } from 'react-responsive';
 import { Modal, Header, Form, Button, Icon } from 'semantic-ui-react';
@@ -18,6 +19,8 @@ const LinkFormModal = ({
   const [modalOpen, setModalOpen] = useState(false);
   const [url, setUrl] = useState(urlToEdit ? urlToEdit : '');
   const [site, setSite] = useState(siteToEdit ? siteToEdit : '');
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
@@ -38,17 +41,26 @@ const LinkFormModal = ({
     e.preventDefault();
 
     try {
+      setIsLoading(true);
       const returnedObject = await contactService.addLink(id, newObject);
       setContacts(contacts.map((c) => (c.id !== id ? c : returnedObject)));
+      setIsLoading(false);
+      setError(null);
 
       notify(`New ${newObject.site} link '${newObject.url}' added`, 'green');
 
       setUrl('');
       setSite('');
       handleClose();
-    } catch (error) {
-      console.error(error.message);
-      notify(`${error.message}`, 'red');
+    } catch (err) {
+      setIsLoading(false);
+      const errRes = err.response.data;
+
+      if (errRes && errRes.error) {
+        return setError(errRes.error);
+      } else {
+        return setError(err.message);
+      }
     }
   };
 
@@ -58,6 +70,7 @@ const LinkFormModal = ({
     const targetContact = contacts.find((c) => c.id === id);
 
     try {
+      setIsLoading(true);
       const returnedObject = await contactService.editLink(id, urlId, {
         ...newObject,
         id: urlId,
@@ -73,12 +86,20 @@ const LinkFormModal = ({
       };
 
       setContacts(contacts.map((c) => (c.id !== id ? c : updatedContact)));
+      setIsLoading(false);
+      setError(null);
+
       notify(`${newObject.site} link edited to '${newObject.url}'`, 'green');
       handleClose();
-    } catch (error) {
-      console.log(id, urlId, { ...newObject, id: urlId });
-      console.error(error.message);
-      notify(`${error.message}`, 'red');
+    } catch (err) {
+      setIsLoading(false);
+      const errRes = err.response.data;
+
+      if (errRes && errRes.error) {
+        return setError(errRes.error);
+      } else {
+        return setError(err.message);
+      }
     }
   };
 
@@ -107,6 +128,7 @@ const LinkFormModal = ({
         icon="linkify"
         content={isTypeEdit ? 'Edit Link - URL & Site' : 'Add New Link'}
       />
+      {error && <FormError message={error} setError={setError} />}
       <Modal.Content>
         <Form onSubmit={isTypeEdit ? editLink : addNewLink}>
           <Form.Input
@@ -135,7 +157,12 @@ const LinkFormModal = ({
             onChange={(e, data) => setSite(data.value)}
             onAddItem={handleOptionAddition}
           />
-          <Button type="submit" color="green" floated="right">
+          <Button
+            type="submit"
+            color="green"
+            floated="right"
+            loading={isLoading}
+          >
             <Icon name={isTypeEdit ? 'edit' : 'add'} />
             {isTypeEdit ? 'Update' : 'Add'}
           </Button>

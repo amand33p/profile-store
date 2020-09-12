@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
+import FormError from './FormError';
 import contactService from '../services/contacts';
 import { generateBase64Encode } from '../utils/arraysAndFuncs';
 import { useMediaQuery } from 'react-responsive';
-import {
-  Modal,
-  Header,
-  Form,
-  Button,
-  Icon,
-  Image,
-  Message,
-} from 'semantic-ui-react';
+import { Modal, Header, Form, Button, Icon, Image } from 'semantic-ui-react';
 
 const AddContactModal = ({
   setContacts,
@@ -24,6 +17,8 @@ const AddContactModal = ({
   const [site, setSite] = useState('');
   const [displayPicture, setDisplayPicture] = useState('');
   const [fileName, setFileName] = useState('');
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
@@ -48,8 +43,11 @@ const AddContactModal = ({
     };
 
     try {
+      setIsLoading(true);
       const returnedObject = await contactService.addNew(contactObject);
       setContacts((prevState) => prevState.concat(returnedObject));
+      setIsLoading(false);
+      setError(null);
 
       notify(`New contact '${returnedObject.name}' added!`, 'green');
       handleClose();
@@ -58,9 +56,15 @@ const AddContactModal = ({
       setUrl('');
       setSite('');
       setDisplayPicture('');
-    } catch (error) {
-      console.error(error.message);
-      notify(`${error.message}`, 'red');
+    } catch (err) {
+      setIsLoading(false);
+      const errRes = err.response.data;
+
+      if (errRes && errRes.error) {
+        return setError(errRes.error);
+      } else {
+        return setError(err.message);
+      }
     }
   };
 
@@ -85,6 +89,7 @@ const AddContactModal = ({
           icon
           labelPosition="left"
           fluid={isMobile ? true : false}
+          size={isMobile ? '' : 'large'}
         >
           <Icon name="add user" />
           Add New Contact
@@ -95,6 +100,7 @@ const AddContactModal = ({
       style={{ padding: '10px' }}
     >
       <Header icon="user add" content="Add New Contact" />
+      {error && <FormError message={error} setError={setError} />}
       <Modal.Content>
         <Form onSubmit={addNewContact}>
           <Form.Input
@@ -174,7 +180,12 @@ const AddContactModal = ({
             />
           )}
           <Modal.Actions>
-            <Button color="green" type="submit" floated="right">
+            <Button
+              color="green"
+              type="submit"
+              floated="right"
+              loading={isLoading}
+            >
               <Icon name="add user" />
               Submit
             </Button>

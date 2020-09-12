@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FormError from './FormError';
 import contactService from '../services/contacts';
 import { generateBase64Encode } from '../utils/arraysAndFuncs';
 import { useMediaQuery } from 'react-responsive';
@@ -9,6 +10,8 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
   const [name, setName] = useState(oldName);
   const [displayPicture, setDisplayPicture] = useState('');
   const [fileName, setFileName] = useState('');
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
@@ -29,6 +32,7 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
     };
 
     try {
+      setIsLoading(true);
       const returnedObject = await contactService.editContact(
         id,
         contactObject
@@ -36,15 +40,23 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
       setContacts((prevState) =>
         prevState.map((p) => (p.id !== id ? p : returnedObject))
       );
+      setIsLoading(false);
+      setError(null);
 
       notify(`Contact '${returnedObject.name}' updated!`, 'green');
       handleClose();
 
       setName('');
       setDisplayPicture('');
-    } catch (error) {
-      console.error(error.message);
-      notify(`${error.message}`, 'red');
+    } catch (err) {
+      setIsLoading(false);
+      const errRes = err.response.data;
+
+      if (errRes && errRes.error) {
+        return setError(errRes.error);
+      } else {
+        return setError(err.message);
+      }
     }
   };
 
@@ -78,6 +90,7 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
       style={{ padding: '10px' }}
     >
       <Header icon="edit" content="Edit Contact - Name &amp; Display Picture" />
+      {error && <FormError message={error} setError={setError} />}
       <Modal.Content>
         <Form onSubmit={addNewContact}>
           <Form.Input
@@ -129,7 +142,12 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
             />
           )}
           <Modal.Actions>
-            <Button color="green" type="submit" floated="right">
+            <Button
+              color="green"
+              type="submit"
+              floated="right"
+              loading={isLoading}
+            >
               <Icon name="edit" />
               Update
             </Button>
