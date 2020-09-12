@@ -97,7 +97,7 @@ const AddContactModal = ({
       }
       onOpen={handleOpen}
       onClose={handleClose}
-      style={{ padding: '10px' }}
+      className="modal"
     >
       <Header icon="user add" content="Add New Contact" />
       {error && <FormError message={error} setError={setError} />}

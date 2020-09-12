@@ -87,7 +87,7 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
       }
       onOpen={handleOpen}
       onClose={handleClose}
-      style={{ padding: '10px' }}
+      className="modal"
     >
       <Header icon="edit" content="Edit Contact - Name &amp; Display Picture" />
       {error && <FormError message={error} setError={setError} />}

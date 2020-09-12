@@ -14,6 +14,7 @@ const Routes = ({
   options,
   handleOptionAddition,
   notify,
+  isLoading,
 }) => {
   return (
     <Switch>
@@ -32,6 +33,7 @@ const Routes = ({
               options={options}
               handleOptionAddition={handleOptionAddition}
               notify={notify}
+              isLoading={isLoading}
             />
           </>
         ) : (

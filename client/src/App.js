@@ -13,6 +13,7 @@ const App = () => {
   const [notification, setNotification] = useState(null);
   const [user, setUser] = useState(null);
   const [options, setOptions] = useState(optionsArray);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const loggedUser = storageService.loadUser();
@@ -26,16 +27,20 @@ const App = () => {
   useEffect(() => {
     const getAllContacts = async () => {
       try {
+        setIsLoading(true);
         const contacts = await contactService.getAll();
         setContacts(contacts);
-      } catch (error) {
-        console.log(error);
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+        notify(err.message, 'red');
       }
     };
 
     if (user) {
       getAllContacts();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   let timeoutId = null;
@@ -72,6 +77,7 @@ const App = () => {
         options={options}
         handleOptionAddition={handleOptionAddition}
         notify={notify}
+        isLoading={isLoading}
       />
     </Container>
   );

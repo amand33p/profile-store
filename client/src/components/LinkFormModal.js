@@ -122,7 +122,7 @@ const LinkFormModal = ({
       }
       onOpen={handleOpen}
       onClose={handleClose}
-      style={{ padding: '10px' }}
+      className="modal"
     >
       <Header
         icon="linkify"

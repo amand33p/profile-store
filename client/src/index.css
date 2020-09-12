@@ -41,6 +41,14 @@ a:hover {
   margin-left: 8px;
 }
 
+.contacts-display {
+  margin-top: 20px;
+}
+
+.modal {
+  padding: 10px;
+}
+
 .avatar-label {
   margin-top: 3px !important;
   margin-left: 0px !important;
