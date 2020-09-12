@@ -13,6 +13,7 @@
     "react-responsive": "^8.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-toast-notifications": "^2.4.0",
     "semantic-ui-react": "^1.0.0"
   },
   "scripts": {

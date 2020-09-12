@@ -43,7 +43,9 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
       setIsLoading(false);
       setError(null);
 
-      notify(`Contact '${returnedObject.name}' updated!`, 'green');
+      notify(`Updated contact "${returnedObject.name}"`, {
+        appearance: 'success',
+      });
       handleClose();
 
       setName('');

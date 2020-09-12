@@ -41,10 +41,10 @@ const Routes = ({
         )}
       </Route>
       <Route exact path="/register">
-        <RegisterForm setUser={setUser} />
+        <RegisterForm setUser={setUser} notify={notify} />
       </Route>
       <Route exact path="/login">
-        <LoginForm setUser={setUser} />
+        <LoginForm setUser={setUser} notify={notify} />
       </Route>
     </Switch>
   );

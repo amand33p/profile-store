@@ -49,7 +49,9 @@ const AddContactModal = ({
       setIsLoading(false);
       setError(null);
 
-      notify(`New contact '${returnedObject.name}' added!`, 'green');
+      notify(`Added new contact "${returnedObject.name}"`, {
+        appearance: 'success',
+      });
       handleClose();
 
       setName('');

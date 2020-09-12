@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from './components/NavBar';
-import Notification from './components/Notification';
 import Routes from './components/Routes';
 import contactService from './services/contacts';
 import { optionsArray } from './utils/arraysAndFuncs';
 import storageService from './utils/localStorageHelpers';
-
+import { useToasts } from 'react-toast-notifications';
 import { Container } from 'semantic-ui-react';
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
-  const [notification, setNotification] = useState(null);
   const [user, setUser] = useState(null);
   const [options, setOptions] = useState(optionsArray);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { addToast: notify } = useToasts();
 
   useEffect(() => {
     const loggedUser = storageService.loadUser();
@@ -33,7 +33,9 @@ const App = () => {
         setIsLoading(false);
       } catch (err) {
         setIsLoading(false);
-        notify(err.message, 'red');
+        notify(err.message, {
+          appearance: 'error',
+        });
       }
     };
 
@@ -42,16 +44,6 @@ const App = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
-
-  let timeoutId = null;
-
-  const notify = (message, color) => {
-    clearTimeout(timeoutId);
-    setNotification({ message, color });
-    timeoutId = setTimeout(() => {
-      setNotification(null);
-    }, 5000);
-  };
 
   const handleOptionAddition = (e, data) => {
     setOptions((prevState) => [
@@ -68,7 +60,6 @@ const App = () => {
   return (
     <Container className="container">
       <NavBar user={user} setUser={setUser} />
-      <Notification notification={notification} />
       <Routes
         contacts={contacts}
         setContacts={setContacts}

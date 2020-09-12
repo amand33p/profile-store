@@ -29,7 +29,9 @@ const DeleteModal = ({
       setIsLoading(false);
       setError(null);
 
-      notify(`Contact '${contact.name}' deleted!`, 'green');
+      notify(`Deleted contact "${contact.name}"`, {
+        appearance: 'success',
+      });
     } catch (err) {
       setIsLoading(false);
       const errRes = err.response.data;
@@ -56,7 +58,9 @@ const DeleteModal = ({
       setIsLoading(false);
       setError(null);
 
-      notify(`${urlName} link '${urlLink}' deleted!`, 'green');
+      notify(`Deleted ${urlName} link "${urlLink}"`, {
+        appearance: 'success',
+      });
     } catch (err) {
       setIsLoading(false);
       const errRes = err.response.data;

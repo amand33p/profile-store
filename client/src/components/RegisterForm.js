@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import FormError from './FormError';
 import contactService from '../services/contacts';
 import authService from '../services/auth';
 import storageService from '../utils/localStorageHelpers';
 
 import { Form, Button, Icon, Header } from 'semantic-ui-react';
 
-const RegisterForm = ({ setUser }) => {
+const RegisterForm = ({ setUser, notify }) => {
   const [userDetails, setUserDetails] = useState({
     displayName: '',
     email: '',
     password: '',
   });
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const history = useHistory();
 
@@ -23,21 +26,37 @@ const RegisterForm = ({ setUser }) => {
   };
 
   const handleRegister = async (e) => {
-    if (password !== confirmPassword) return console.log('confirm pass failed');
+    if (password !== confirmPassword)
+      return setError(`Confirm password failed. Both passwords need to match.`);
     e.preventDefault();
     try {
+      setIsLoading(true);
       const user = await authService.register(userDetails);
       setUser(user);
+      setIsLoading(false);
+      setError(null);
+
+      notify(`Welcome ${user.displayName}, you have successfully registered!`, {
+        appearance: 'success',
+      });
       contactService.setToken(user.token);
       storageService.saveUser(user);
       history.push('/');
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      setIsLoading(false);
+      const errRes = err.response.data;
+
+      if (errRes && errRes.error) {
+        return setError(errRes.error);
+      } else {
+        return setError(err.message);
+      }
     }
   };
 
   return (
     <Form onSubmit={handleRegister}>
+      {error && <FormError message={error} setError={setError} />}
       <Form.Input
         required
         placeholder="For ex. Ben Awad"
@@ -90,12 +109,12 @@ const RegisterForm = ({ setUser }) => {
         type="submit"
         floated="right"
         size="large"
+        loading={isLoading}
       >
         <Icon name="signup" />
         Register
       </Button>
       <Header as="h4">
-        {' '}
         Already have an account? <Link to="/login">Login.</Link>
       </Header>
     </Form>

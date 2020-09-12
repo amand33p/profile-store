@@ -47,7 +47,9 @@ const LinkFormModal = ({
       setIsLoading(false);
       setError(null);
 
-      notify(`New ${newObject.site} link '${newObject.url}' added`, 'green');
+      notify(`Added new ${newObject.site} link "${newObject.url}"`, {
+        appearance: 'success',
+      });
 
       setUrl('');
       setSite('');
@@ -89,7 +91,9 @@ const LinkFormModal = ({
       setIsLoading(false);
       setError(null);
 
-      notify(`${newObject.site} link edited to '${newObject.url}'`, 'green');
+      notify(`Edited ${newObject.site} link to "${newObject.url}"`, {
+        appearance: 'success',
+      });
       handleClose();
     } catch (err) {
       setIsLoading(false);
