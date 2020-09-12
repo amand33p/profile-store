@@ -26,7 +26,7 @@ const NavBar = ({ user, setUser }) => {
     ) : (
       <>
         <Menu.Item>{`Hi, ${user.displayName}`}</Menu.Item>
-        <Menu.Item name="Logout" onClick={handleLogout} />
+        <Menu.Item name="Logout" onClick={handleLogout} icon="sign-out" />
       </>
     );
   };
@@ -50,12 +50,14 @@ const NavBar = ({ user, setUser }) => {
           name="Register"
           to="/register"
           active={location.pathname === '/register'}
+          icon="signup"
         />
         <Menu.Item
           as={Link}
           name="Login"
           to="/login"
           active={location.pathname === '/login'}
+          icon="sign-in"
         />
       </>
     );

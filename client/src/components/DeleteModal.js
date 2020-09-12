@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import contactService from '../services/contacts';
+import { useMediaQuery } from 'react-responsive';
 import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 
 const DeleteModal = ({
@@ -14,6 +15,8 @@ const DeleteModal = ({
   notify,
 }) => {
   const [open, setOpen] = useState(false);
+
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const handleContactDelete = async () => {
     try {
@@ -53,18 +56,21 @@ const DeleteModal = ({
       open={open}
       trigger={
         <Button
-          content={isTypeContact ? 'Delete' : undefined}
+          content={
+            isTypeContact ? (isMobile ? undefined : 'Delete') : undefined
+          }
           icon={isTypeContact ? 'user delete' : 'delete'}
-          color="red"
-          floated="right"
-          size={isTypeContact ? 'medium' : 'tiny'}
+          color={isTypeContact ? 'red' : ''}
+          size={isTypeContact ? (isMobile ? 'mini' : 'medium') : 'tiny'}
           className={isTypeContact ? 'contact-del-btn' : 'delete-btn'}
+          floated={isTypeContact ? '' : 'right'}
+          compact
         />
       }
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
-      <Header icon="delete" content="Confirm Delete" />
+      <Header icon="trash alternate" content="Confirm Delete" />
       <Modal.Content>
         <p>
           {isTypeContact

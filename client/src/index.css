@@ -50,6 +50,33 @@ a:hover {
   margin: 0 auto;
 }
 
+.upload-preview {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.clear-preview-btn {
+  margin-top: 0.3em !important;
+}
+
+.card-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.contact-edit-btn {
+  margin-right: 1em !important;
+}
+
+.edit-btn .icon {
+  color: #49769c !important;
+}
+
+.delete-btn .icon {
+  color: #db2828 !important;
+}
+
 @media only screen and (max-width: 768px) {
   body {
     width: 100vw;
@@ -61,5 +88,13 @@ a:hover {
 
   .delete-btn {
     padding: 5px !important;
+  }
+
+  .contact-edit-btn {
+    padding: 8px !important;
+  }
+
+  .contact-del-btn {
+    padding: 8px !important;
   }
 }

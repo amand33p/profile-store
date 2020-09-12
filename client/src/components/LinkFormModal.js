@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import contactService from '../services/contacts';
+import { useMediaQuery } from 'react-responsive';
 import { Modal, Header, Form, Button, Icon } from 'semantic-ui-react';
 
 const LinkFormModal = ({
@@ -14,9 +15,11 @@ const LinkFormModal = ({
   siteToEdit,
   notify,
 }) => {
+  const [modalOpen, setModalOpen] = useState(false);
   const [url, setUrl] = useState(urlToEdit ? urlToEdit : '');
   const [site, setSite] = useState(siteToEdit ? siteToEdit : '');
-  const [modalOpen, setModalOpen] = useState(false);
+
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const handleOpen = () => {
     setModalOpen(true);
@@ -83,24 +86,26 @@ const LinkFormModal = ({
 
   return (
     <Modal
+      closeIcon
+      open={modalOpen}
       trigger={
         <Button
-          color={isTypeEdit ? 'twitter' : 'green'}
-          size={isTypeEdit ? 'tiny' : 'small'}
-          onClick={handleOpen}
+          color={isTypeEdit ? '' : 'green'}
+          size={isTypeEdit ? 'tiny' : isMobile ? 'mini' : 'small'}
           floated={isTypeEdit ? 'right' : 'left'}
           icon={isTypeEdit ? 'edit' : 'add'}
-          content={isTypeEdit ? undefined : 'Add'}
+          content={isTypeEdit ? undefined : 'Add URL'}
           className={isTypeEdit ? 'edit-btn' : 'add-btn'}
+          compact
         />
       }
-      open={modalOpen}
+      onOpen={handleOpen}
       onClose={handleClose}
-      closeIcon
       style={{ padding: '10px' }}
     >
       <Header
-        content={isTypeEdit ? 'Edit the link' : 'Add new link to contact'}
+        icon="linkify"
+        content={isTypeEdit ? 'Edit Link - URL & Site' : 'Add New Link'}
       />
       <Modal.Content>
         <Form onSubmit={isTypeEdit ? editLink : addNewLink}>
@@ -131,7 +136,8 @@ const LinkFormModal = ({
             onAddItem={handleOptionAddition}
           />
           <Button type="submit" color="green" floated="right">
-            {isTypeEdit ? 'Edit' : 'Add'}
+            <Icon name={isTypeEdit ? 'edit' : 'add'} />
+            {isTypeEdit ? 'Update' : 'Add'}
           </Button>
         </Form>
       </Modal.Content>

@@ -44,3 +44,11 @@ export const getCircularAvatar = (imageLink) => {
 
   return [firstPart, transformApi, secondPart].join('');
 };
+
+export const generateBase64Encode = (file, setState) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onloadend = () => {
+    setState(reader.result);
+  };
+};

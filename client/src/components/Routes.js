@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import AddContactForm from '../components/AddContactForm';
+import AddContactModal from '../components/AddContactModal';
 import ContactsDisplay from '../components/ContactsDisplay';
 import RegisterForm from '../components/RegisterForm';
 import LoginForm from '../components/LoginForm';
@@ -20,7 +20,7 @@ const Routes = ({
       <Route exact path="/">
         {storageService.loadUser() || user ? (
           <>
-            <AddContactForm
+            <AddContactModal
               setContacts={setContacts}
               options={options}
               handleOptionAddition={handleOptionAddition}

@@ -2,6 +2,7 @@ import React from 'react';
 import LinkFormModal from './LinkFormModal';
 import DeleteModal from './DeleteModal';
 import DisplayPictureModal from './DisplayPictureModal';
+import EditContactModal from './EditContactModal';
 import { siteIconsArray, randomColor } from '../utils/arraysAndFuncs';
 
 import { Header, Card, List, Label } from 'semantic-ui-react';
@@ -17,29 +18,38 @@ const ContactCard = ({
   return (
     <Card fluid>
       <Card.Content>
-        <Header as="h2">
-          {contact.displayPicture.exists ? (
-            <DisplayPictureModal imageLink={contact.displayPicture.link} />
-          ) : (
-            <Label
-              circular
-              color={randomColor()}
-              size="massive"
-              className="avatar-label"
-            >
-              {contact.name[0]}
-            </Label>
-          )}
-          <span className="name-header">{contact.name}</span>
-
-          <DeleteModal
-            type="contact"
-            contact={contact}
-            contacts={contacts}
-            setContacts={setContacts}
-            id={contact.id}
-            notify={notify}
-          />
+        <Header className="card-header">
+          <div>
+            {contact.displayPicture.exists ? (
+              <DisplayPictureModal imageLink={contact.displayPicture.link} />
+            ) : (
+              <Label
+                circular
+                color={randomColor()}
+                size="massive"
+                className="avatar-label"
+              >
+                {contact.name[0]}
+              </Label>
+            )}
+            <span className="name-header">{contact.name}</span>
+          </div>
+          <div>
+            <EditContactModal
+              setContacts={setContacts}
+              id={contact.id}
+              notify={notify}
+              oldName={contact.name}
+            />
+            <DeleteModal
+              type="contact"
+              contact={contact}
+              contacts={contacts}
+              setContacts={setContacts}
+              id={contact.id}
+              notify={notify}
+            />
+          </div>
         </Header>
       </Card.Content>
       <Card.Content>
@@ -65,6 +75,17 @@ const ContactCard = ({
                   >
                     {c.url.startsWith('http') ? c.url.split('//')[1] : c.url}
                   </a>
+                  <DeleteModal
+                    type="link"
+                    contact={contact}
+                    contacts={contacts}
+                    setContacts={setContacts}
+                    id={contact.id}
+                    urlId={c.id}
+                    urlLink={c.url}
+                    urlName={c.site}
+                    notify={notify}
+                  />
                   <LinkFormModal
                     type="edit"
                     id={contact.id}
@@ -75,17 +96,6 @@ const ContactCard = ({
                     handleOptionAddition={handleOptionAddition}
                     urlToEdit={c.url}
                     siteToEdit={c.site}
-                    notify={notify}
-                  />
-                  <DeleteModal
-                    type="link"
-                    contact={contact}
-                    contacts={contacts}
-                    setContacts={setContacts}
-                    id={contact.id}
-                    urlId={c.id}
-                    urlLink={c.url}
-                    urlName={c.site}
                     notify={notify}
                   />
                 </List.Header>
