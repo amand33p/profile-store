@@ -12,7 +12,8 @@ const FormError = ({ message, setError }) => {
           floated="right"
           onClick={() => setError(null)}
           compact
-          size="small"
+          size="mini"
+          circular
         />
       </Message.Header>
       <p>{message}</p>

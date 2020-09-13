@@ -90,8 +90,8 @@ const AddContactModal = ({
           color="teal"
           icon
           labelPosition="left"
-          fluid={isMobile ? true : false}
-          size={isMobile ? '' : 'large'}
+          fluid={isMobile}
+          size={isMobile ? 'medium' : 'large'}
         >
           <Icon name="add user" />
           Add New Contact

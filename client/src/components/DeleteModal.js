@@ -105,13 +105,14 @@ const DeleteModal = ({
         </p>
       </Modal.Content>
       <Modal.Actions>
-        <Button color="red" onClick={() => setOpen(false)}>
+        <Button color="red" onClick={() => setOpen(false)} floated="left">
           <Icon name="remove" /> No
         </Button>
         <Button
           color="green"
           onClick={isTypeContact ? handleContactDelete : handleLinkDelete}
           loading={isLoading}
+          floated="right"
         >
           <Icon name="checkmark" /> Yes
         </Button>

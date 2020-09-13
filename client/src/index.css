@@ -89,6 +89,12 @@ a:hover {
   color: #db2828 !important;
 }
 
+.login-reg-card {
+  padding-left: 14em !important;
+  padding-right: 14em !important;
+  padding-bottom: 2em !important;
+}
+
 @media only screen and (max-width: 768px) {
   body {
     width: 100vw;
@@ -108,5 +114,15 @@ a:hover {
 
   .contact-del-btn {
     padding: 8px !important;
+  }
+
+  .login-reg-card {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+    padding-bottom: 1em !important;
+  }
+
+  .login-reg-bottom-text {
+    margin-top: 4em !important;
   }
 }
