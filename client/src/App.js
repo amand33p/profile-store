@@ -12,6 +12,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [options, setOptions] = useState(optionsArray);
   const [isLoading, setIsLoading] = useState(false);
+  const [search, setSearch] = useState('');
 
   const { addToast: notify } = useToasts();
 
@@ -65,6 +66,8 @@ const App = () => {
         setContacts={setContacts}
         user={user}
         setUser={setUser}
+        search={search}
+        setSearch={setSearch}
         options={options}
         handleOptionAddition={handleOptionAddition}
         notify={notify}

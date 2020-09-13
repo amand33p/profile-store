@@ -121,7 +121,7 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
               basic: true,
               content:
                 fileName === ''
-                  ? 'Select image for DP'
+                  ? 'Select Image for DP'
                   : `Selected "${fileName}"`,
             }}
             labelPosition="right"
@@ -136,11 +136,11 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
           {displayPicture && (
             <Button
               onClick={clearfileSelection}
-              size="mini"
+              size="small"
               className="clear-preview-btn"
             >
               <Icon name="remove circle" />
-              Clear
+              Un-select Image
             </Button>
           )}
           {displayPicture && (

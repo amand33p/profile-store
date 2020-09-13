@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import Search from './Search';
 import AddContactModal from '../components/AddContactModal';
 import ContactsDisplay from '../components/ContactsDisplay';
 import RegisterForm from '../components/RegisterForm';
@@ -11,6 +12,8 @@ const Routes = ({
   setContacts,
   user,
   setUser,
+  search,
+  setSearch,
   options,
   handleOptionAddition,
   notify,
@@ -21,15 +24,18 @@ const Routes = ({
       <Route exact path="/">
         {storageService.loadUser() || user ? (
           <>
+            <Search setSearch={setSearch} search={search} />
             <AddContactModal
               setContacts={setContacts}
               options={options}
               handleOptionAddition={handleOptionAddition}
               notify={notify}
             />
+
             <ContactsDisplay
               contacts={contacts}
               setContacts={setContacts}
+              search={search}
               options={options}
               handleOptionAddition={handleOptionAddition}
               notify={notify}

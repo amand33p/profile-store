@@ -41,6 +41,10 @@ a:hover {
   margin-left: 8px;
 }
 
+.search-card {
+  margin-bottom: 1em !important;
+}
+
 .contacts-display {
   margin-top: 20px;
 }
@@ -93,6 +97,10 @@ a:hover {
   padding-left: 14em !important;
   padding-right: 14em !important;
   padding-bottom: 2em !important;
+}
+
+.main-text {
+  margin-top: 3em !important;
 }
 
 @media only screen and (max-width: 768px) {
