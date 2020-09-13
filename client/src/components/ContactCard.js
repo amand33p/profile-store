@@ -55,7 +55,7 @@ const ContactCard = ({
       <Card.Content>
         <List divided relaxed animated>
           {contact.contacts.map((c) => (
-            <List.Item key={c + c.id}>
+            <List.Item key={c.id}>
               <List.Icon
                 name={
                   siteIconsArray.includes(c.site.toLowerCase())

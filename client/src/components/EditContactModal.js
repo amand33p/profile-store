@@ -43,12 +43,20 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
       setIsLoading(false);
       setError(null);
 
-      notify(`Updated contact "${returnedObject.name}"`, {
+      let message = `Updated contact "${returnedObject.name}"`;
+
+      if (oldName !== returnedObject.name && displayPicture !== '') {
+        message = `Updated contact name from "${oldName}" to "${returnedObject.name}" & changed DP`;
+      } else if (oldName === returnedObject.name && displayPicture !== '') {
+        message = `Updated DP of contact "${returnedObject.name}"`;
+      } else if (oldName !== returnedObject.name && displayPicture === '') {
+        message = `Updated contact name from "${oldName}" to "${returnedObject.name}"`;
+      }
+
+      notify(message, {
         appearance: 'success',
       });
       handleClose();
-
-      setName('');
       setDisplayPicture('');
     } catch (err) {
       setIsLoading(false);

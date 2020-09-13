@@ -50,7 +50,6 @@ const LinkFormModal = ({
       notify(`Added new ${newObject.site} link "${newObject.url}"`, {
         appearance: 'success',
       });
-
       setUrl('');
       setSite('');
       handleClose();
@@ -73,10 +72,11 @@ const LinkFormModal = ({
 
     try {
       setIsLoading(true);
-      const returnedObject = await contactService.editLink(id, urlId, {
-        ...newObject,
-        id: urlId,
-      });
+      const returnedObject = await contactService.editLink(
+        id,
+        urlId,
+        newObject
+      );
 
       const updatedContactsKey = targetContact.contacts.map((t) =>
         t.id !== urlId ? t : returnedObject

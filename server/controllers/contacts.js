@@ -228,14 +228,15 @@ router.patch('/:id/url/:urlId', auth, async (req, res) => {
       .send({ error: `URL with ID: ${urlId} does not exist in database.` });
   }
 
-  const updatedUrl = { url, site, id: urlId };
+  urlToUpdate.url = url;
+  urlToUpdate.site = site;
 
   person.contacts = person.contacts.map((c) =>
-    c.id === urlId ? updatedUrl : c
+    c.id !== urlId ? c : urlToUpdate
   );
 
   await person.save();
-  res.status(202).json(updatedUrl);
+  res.status(202).json(urlToUpdate);
 });
 
 router.delete('/:id/url/:urlId', auth, async (req, res) => {

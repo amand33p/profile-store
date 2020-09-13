@@ -49,7 +49,7 @@ const AddContactModal = ({
       setIsLoading(false);
       setError(null);
 
-      notify(`Added new contact "${returnedObject.name}"`, {
+      notify(`Added new contact named as "${returnedObject.name}"`, {
         appearance: 'success',
       });
       handleClose();
