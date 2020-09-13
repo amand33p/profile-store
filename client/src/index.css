@@ -37,6 +37,10 @@ a:hover {
   align-self: flex-start;
 }
 
+.navbar-menu {
+  padding: 0.5em !important;
+}
+
 .name-header {
   margin-left: 8px;
 }

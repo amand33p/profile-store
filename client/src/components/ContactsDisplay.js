@@ -36,6 +36,18 @@ const ContactsDisplay = ({
           Showing search results for query "{search}"
         </Header>
       )}
+      {search !== '' && contactsToDisplay.length === 0 && (
+        <Header textAlign="center" as="h2" className="main-text">
+          <Icon name="searchengin" />
+          Search: No matches found for "{search}"
+        </Header>
+      )}
+      {!isLoading && search === '' && contactsToDisplay.length === 0 && (
+        <Header textAlign="center" as="h2" className="main-text">
+          <Icon name="info" />
+          No contacts added yet.
+        </Header>
+      )}
       {isLoading ? (
         <ContactsLoader />
       ) : (
@@ -50,18 +62,6 @@ const ContactsDisplay = ({
             notify={notify}
           />
         ))
-      )}
-      {search !== '' && contactsToDisplay.length === 0 && (
-        <Header textAlign="center" as="h2" className="main-text">
-          <Icon name="searchengin" />
-          Search: No matches found for "{search}"
-        </Header>
-      )}
-      {!isLoading && search === '' && contactsToDisplay.length === 0 && (
-        <Header textAlign="center" as="h2" className="main-text">
-          <Icon name="info" />
-          No contacts added yet.
-        </Header>
       )}
     </div>
   );

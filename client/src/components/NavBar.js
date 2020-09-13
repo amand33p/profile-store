@@ -17,7 +17,7 @@ const NavBar = ({ user, setUser }) => {
   const logoutMenu = () => {
     return isMobile ? (
       <Dropdown item icon="sidebar">
-        <Dropdown.Menu>
+        <Dropdown.Menu className="navbar-menu">
           <Dropdown.Item>{`Hi, ${user.displayName}`}</Dropdown.Item>
           <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
         </Dropdown.Menu>
