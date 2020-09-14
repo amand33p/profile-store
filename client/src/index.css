@@ -107,6 +107,10 @@ a:hover {
   align-items: center !important;
 }
 
+.add-contact-btn {
+  margin-top: 1em !important;
+}
+
 .contact-edit-btn {
   margin-right: 1em !important;
 }

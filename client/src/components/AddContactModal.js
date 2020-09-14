@@ -93,6 +93,7 @@ const AddContactModal = ({
           labelPosition="left"
           fluid={isMobile}
           size={isMobile ? 'medium' : 'large'}
+          className={isMobile ? '' : 'add-contact-btn'}
         >
           <Icon name="add user" />
           Add New Contact
