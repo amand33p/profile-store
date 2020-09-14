@@ -18,20 +18,25 @@ const Routes = ({
   handleOptionAddition,
   notify,
   isLoading,
+  isDarkMode,
 }) => {
   return (
     <Switch>
       <Route exact path="/">
         {storageService.loadUser() || user ? (
           <>
-            <Search setSearch={setSearch} search={search} />
+            <Search
+              setSearch={setSearch}
+              search={search}
+              isDarkMode={isDarkMode}
+            />
             <AddContactModal
               setContacts={setContacts}
               options={options}
               handleOptionAddition={handleOptionAddition}
               notify={notify}
+              isDarkMode={isDarkMode}
             />
-
             <ContactsDisplay
               contacts={contacts}
               setContacts={setContacts}
@@ -40,6 +45,7 @@ const Routes = ({
               handleOptionAddition={handleOptionAddition}
               notify={notify}
               isLoading={isLoading}
+              isDarkMode={isDarkMode}
             />
           </>
         ) : (
@@ -47,10 +53,14 @@ const Routes = ({
         )}
       </Route>
       <Route exact path="/register">
-        <RegisterForm setUser={setUser} notify={notify} />
+        <RegisterForm
+          setUser={setUser}
+          notify={notify}
+          isDarkMode={isDarkMode}
+        />
       </Route>
       <Route exact path="/login">
-        <LoginForm setUser={setUser} notify={notify} />
+        <LoginForm setUser={setUser} notify={notify} isDarkMode={isDarkMode} />
       </Route>
     </Switch>
   );

@@ -17,13 +17,26 @@ code {
   margin-bottom: 2em;
 }
 
+.main-segment {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
+  padding: 0 !important;
+}
+
 a {
-  color: teal;
+  color: rgb(3, 63, 63);
 }
 
 a:hover {
-  color: teal;
+  color: rgb(5, 168, 168);
   filter: brightness(60%);
+}
+
+.nav-bar {
+  height: 4em !important;
 }
 
 .nav-title {
@@ -32,7 +45,8 @@ a:hover {
 }
 
 .nav-logo {
-  font-size: 1.1em;
+  height: 25px !important;
+  font-size: 1.3em;
   margin-bottom: 0.2em;
   align-self: flex-start;
 }
@@ -109,6 +123,107 @@ a:hover {
 
 .auth-form {
   margin-bottom: 2em;
+}
+
+.dark-mode-input input {
+  background: #1b1c1d !important;
+  color: white !important;
+  border: 1px solid white !important;
+}
+
+.dark-mode-card .content {
+  background: #1b1c1d !important;
+  color: white !important;
+}
+
+.dark-mode-card .content strong {
+  color: white !important;
+}
+
+.dark-mode-modal {
+  background: #1b1c1d !important;
+  color: white !important;
+}
+
+.dark-mode-modal .header {
+  background: #1b1c1d !important;
+  color: white !important;
+}
+
+.dark-mode-modal .content {
+  background: #1b1c1d !important;
+  color: white !important;
+}
+
+.dark-mode-modal label {
+  background: #1b1c1d !important;
+  color: white !important;
+}
+
+.dark-mode-modal input {
+  background: #1b1c1d !important;
+  color: white !important;
+  border: 1px solid white !important;
+}
+
+.dark-mode-modal .field .dropdown {
+  background: #1b1c1d !important;
+  color: white !important;
+  border: 1px solid white !important;
+}
+
+.dark-mode-modal .field .dropdown i {
+  color: white !important;
+  border-width: 0 !important;
+  border-bottom-width: 1px !important;
+}
+
+.dark-mode-modal .field .dropdown .menu .item {
+  background: #1b1c1d !important;
+  color: white !important;
+}
+
+.dark-mode-modal .field .dropdown .menu .selected {
+  color: rgb(194, 229, 229) !important;
+  background-color: rgb(70, 70, 63) !important;
+}
+
+.dark-mode-modal .field .dropdown .menu .item:hover {
+  background-color: rgb(95, 95, 91) !important;
+}
+
+.dark-mode-modal i {
+  color: white !important;
+}
+
+.dark-mode-modal label i {
+  color: black !important;
+}
+
+.dark-mode-modal .actions {
+  background: #1b1c1d !important;
+}
+
+.dark-mode-auth-form label {
+  color: white !important;
+}
+
+.dark-mode-auth-form .header {
+  color: white !important;
+}
+
+.dark-mode-auth-form input {
+  background: #1b1c1d !important;
+  color: white !important;
+  border: 1px solid white !important;
+}
+
+.dark-mode-auth-form i {
+  color: white !important;
+}
+
+.dark-mode-auth-form .button i {
+  color: black !important;
 }
 
 @media only screen and (max-width: 768px) {

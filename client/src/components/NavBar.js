@@ -18,6 +18,7 @@ const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
   const handleDarkModeToggle = () => {
     setIsDarkMode(!isDarkMode);
     setIconLoading(true);
+    storageService.saveDarkMode(isDarkMode);
     setTimeout(() => setIconLoading(false), 2150);
   };
 
@@ -70,10 +71,16 @@ const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
   };
 
   return (
-    <Menu color="teal" borderless={isMobile ? true : false}>
+    <Menu
+      borderless={isMobile}
+      inverted={isDarkMode}
+      size="small"
+      color="teal"
+      className="nav-bar"
+    >
       <Menu.Item header className="nav-title">
         <div className="nav-logo">
-          <Icon name="user circle outline" color="teal" />
+          <Icon name="user circle" />
           Profile Store
         </div>
         <small>
@@ -94,7 +101,7 @@ const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
             <Icon
               name={isDarkMode ? 'moon' : 'sun'}
               size="large"
-              color={isDarkMode ? 'blue' : 'yellow'}
+              color={isDarkMode ? 'purple' : 'yellow'}
               circular
               loading={iconLoading}
             />

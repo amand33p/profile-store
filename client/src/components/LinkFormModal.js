@@ -15,6 +15,7 @@ const LinkFormModal = ({
   urlToEdit,
   siteToEdit,
   notify,
+  isDarkMode,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [url, setUrl] = useState(urlToEdit ? urlToEdit : '');
@@ -126,7 +127,7 @@ const LinkFormModal = ({
       }
       onOpen={handleOpen}
       onClose={handleClose}
-      className="modal"
+      className={isDarkMode ? 'dark-mode-modal modal' : 'modal'}
     >
       <Header
         icon="linkify"

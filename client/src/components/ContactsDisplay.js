@@ -11,6 +11,7 @@ const ContactsDisplay = ({
   handleOptionAddition,
   notify,
   isLoading,
+  isDarkMode,
 }) => {
   const filterByName = (contact, search) => {
     return contact.name.toLowerCase().includes(search.toLowerCase());
@@ -49,7 +50,7 @@ const ContactsDisplay = ({
         </Header>
       )}
       {isLoading ? (
-        <ContactsLoader />
+        <ContactsLoader isDarkMode={isDarkMode} />
       ) : (
         contactsToDisplay.map((contact) => (
           <ContactCard
@@ -60,6 +61,7 @@ const ContactsDisplay = ({
             handleOptionAddition={handleOptionAddition}
             key={contact.id}
             notify={notify}
+            isDarkMode={isDarkMode}
           />
         ))
       )}

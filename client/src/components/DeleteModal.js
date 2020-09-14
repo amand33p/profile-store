@@ -14,6 +14,7 @@ const DeleteModal = ({
   urlLink,
   urlName,
   notify,
+  isDarkMode,
 }) => {
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
@@ -94,6 +95,7 @@ const DeleteModal = ({
       }
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
+      className={isDarkMode ? 'dark-mode-modal' : ''}
     >
       <Header icon="trash alternate" content="Confirm Delete" />
       {error && <FormError message={error} setError={setError} />}

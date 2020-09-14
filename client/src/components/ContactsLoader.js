@@ -1,12 +1,12 @@
 import React from 'react';
 import { Placeholder, Segment } from 'semantic-ui-react';
 
-const ContactsLoader = () => {
+const ContactsLoader = ({ isDarkMode }) => {
   return (
     <div>
       {Array.from(new Array(3)).map((a) => (
-        <Segment key={a} raised>
-          <Placeholder fluid>
+        <Segment key={a} raised inverted={isDarkMode}>
+          <Placeholder fluid inverted={isDarkMode}>
             <Placeholder.Header image>
               <Placeholder.Line />
               <Placeholder.Line />

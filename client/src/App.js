@@ -5,7 +5,7 @@ import contactService from './services/contacts';
 import { optionsArray } from './utils/arraysAndFuncs';
 import storageService from './utils/localStorageHelpers';
 import { useToasts } from 'react-toast-notifications';
-import { Container } from 'semantic-ui-react';
+import { Container, Segment } from 'semantic-ui-react';
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
@@ -47,6 +47,13 @@ const App = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
+  useEffect(() => {
+    const darkMode = storageService.loadDarkMode();
+    if (darkMode) {
+      setIsDarkMode(true);
+    }
+  }, []);
+
   const handleOptionAddition = (e, data) => {
     setOptions((prevState) => [
       {
@@ -60,26 +67,29 @@ const App = () => {
   };
 
   return (
-    <Container className="container">
-      <NavBar
-        user={user}
-        setUser={setUser}
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
-      />
-      <Routes
-        contacts={contacts}
-        setContacts={setContacts}
-        user={user}
-        setUser={setUser}
-        search={search}
-        setSearch={setSearch}
-        options={options}
-        handleOptionAddition={handleOptionAddition}
-        notify={notify}
-        isLoading={isLoading}
-      />
-    </Container>
+    <Segment className="main-segment" inverted={isDarkMode}>
+      <Container className="container">
+        <NavBar
+          user={user}
+          setUser={setUser}
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+        />
+        <Routes
+          contacts={contacts}
+          setContacts={setContacts}
+          user={user}
+          setUser={setUser}
+          search={search}
+          setSearch={setSearch}
+          options={options}
+          handleOptionAddition={handleOptionAddition}
+          notify={notify}
+          isLoading={isLoading}
+          isDarkMode={isDarkMode}
+        />
+      </Container>
+    </Segment>
   );
 };
 

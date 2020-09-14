@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'semantic-ui-react';
 
-const Search = ({ search, setSearch }) => {
+const Search = ({ search, setSearch, isDarkMode }) => {
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
@@ -9,6 +9,7 @@ const Search = ({ search, setSearch }) => {
   return (
     <div className="search-card">
       <Input
+        className={isDarkMode ? 'dark-mode-input' : ''}
         fluid
         size="large"
         type="text"

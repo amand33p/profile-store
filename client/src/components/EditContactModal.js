@@ -5,7 +5,7 @@ import { generateBase64Encode } from '../utils/arraysAndFuncs';
 import { useMediaQuery } from 'react-responsive';
 import { Modal, Header, Form, Button, Icon, Image } from 'semantic-ui-react';
 
-const EditContactModal = ({ oldName, setContacts, id, notify }) => {
+const EditContactModal = ({ oldName, setContacts, id, notify, isDarkMode }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState(oldName);
   const [displayPicture, setDisplayPicture] = useState('');
@@ -97,9 +97,13 @@ const EditContactModal = ({ oldName, setContacts, id, notify }) => {
       }
       onOpen={handleOpen}
       onClose={handleClose}
-      className="modal"
+      className={isDarkMode ? 'dark-mode-modal modal' : 'modal'}
     >
-      <Header icon="edit" content="Edit Contact - Name &amp; Display Picture" />
+      <Header
+        icon="edit"
+        content="Edit Contact - Name &amp; Display Picture"
+        inverted={isDarkMode}
+      />
       {error && <FormError message={error} setError={setError} />}
       <Modal.Content>
         <Form onSubmit={addNewContact}>

@@ -7,7 +7,7 @@ import storageService from '../utils/localStorageHelpers';
 import { useMediaQuery } from 'react-responsive';
 import { Segment, Form, Button, Icon, Header } from 'semantic-ui-react';
 
-const LoginForm = ({ setUser, notify }) => {
+const LoginForm = ({ setUser, notify, isDarkMode }) => {
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -57,12 +57,15 @@ const LoginForm = ({ setUser, notify }) => {
   };
 
   return (
-    <Segment className="login-reg-card">
+    <Segment className="login-reg-card" inverted={isDarkMode}>
       <Header as={isMobile ? 'h3' : 'h2'} textAlign="center">
         <Icon name="sign-in" />
         Login to your account
       </Header>
-      <Form onSubmit={handleLogin} className="auth-form">
+      <Form
+        onSubmit={handleLogin}
+        className={isDarkMode ? 'dark-mode-auth-form auth-form' : 'auth-form'}
+      >
         <Form.Input
           required
           placeholder="For ex. abc@example.com"

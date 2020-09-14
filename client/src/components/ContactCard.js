@@ -14,9 +14,10 @@ const ContactCard = ({
   options,
   handleOptionAddition,
   notify,
+  isDarkMode,
 }) => {
   return (
-    <Card fluid>
+    <Card fluid className={isDarkMode ? 'dark-mode-card' : ''}>
       <Card.Content>
         <Header className="card-header">
           <div>
@@ -32,7 +33,7 @@ const ContactCard = ({
                 {contact.name[0]}
               </Label>
             )}
-            <span className="name-header">{contact.name}</span>
+            <strong className="name-header">{contact.name}</strong>
           </div>
           <div>
             <EditContactModal
@@ -40,6 +41,7 @@ const ContactCard = ({
               id={contact.id}
               notify={notify}
               oldName={contact.name}
+              isDarkMode={isDarkMode}
             />
             <DeleteModal
               type="contact"
@@ -48,12 +50,13 @@ const ContactCard = ({
               setContacts={setContacts}
               id={contact.id}
               notify={notify}
+              isDarkMode={isDarkMode}
             />
           </div>
         </Header>
       </Card.Content>
       <Card.Content>
-        <List divided relaxed animated>
+        <List divided relaxed animated inverted={isDarkMode}>
           {contact.contacts.map((c) => (
             <List.Item key={c.id}>
               <List.Icon
@@ -62,7 +65,8 @@ const ContactCard = ({
                     ? c.site.toLowerCase()
                     : 'globe'
                 }
-                color="black"
+                color={isDarkMode ? 'white' : 'black'}
+                size="big"
               />
               <List.Content>
                 <List.Header>
@@ -85,6 +89,7 @@ const ContactCard = ({
                     urlLink={c.url}
                     urlName={c.site}
                     notify={notify}
+                    isDarkMode={isDarkMode}
                   />
                   <LinkFormModal
                     type="edit"
@@ -97,6 +102,7 @@ const ContactCard = ({
                     urlToEdit={c.url}
                     siteToEdit={c.site}
                     notify={notify}
+                    isDarkMode={isDarkMode}
                   />
                 </List.Header>
                 <List.Description as="a">{c.site}</List.Description>
@@ -112,6 +118,7 @@ const ContactCard = ({
           options={options}
           handleOptionAddition={handleOptionAddition}
           notify={notify}
+          isDarkMode={isDarkMode}
         />
       </Card.Content>
     </Card>

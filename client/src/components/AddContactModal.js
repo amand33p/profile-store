@@ -10,6 +10,7 @@ const AddContactModal = ({
   options,
   handleOptionAddition,
   notify,
+  isDarkMode,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [name, setName] = useState('');
@@ -99,7 +100,7 @@ const AddContactModal = ({
       }
       onOpen={handleOpen}
       onClose={handleClose}
-      className="modal"
+      className={isDarkMode ? 'dark-mode-modal modal' : 'modal'}
     >
       <Header icon="user add" content="Add New Contact" />
       {error && <FormError message={error} setError={setError} />}

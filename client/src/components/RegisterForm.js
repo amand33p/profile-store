@@ -7,7 +7,7 @@ import storageService from '../utils/localStorageHelpers';
 import { useMediaQuery } from 'react-responsive';
 import { Segment, Form, Button, Icon, Header } from 'semantic-ui-react';
 
-const RegisterForm = ({ setUser, notify }) => {
+const RegisterForm = ({ setUser, notify, isDarkMode }) => {
   const [userDetails, setUserDetails] = useState({
     displayName: '',
     email: '',
@@ -58,12 +58,15 @@ const RegisterForm = ({ setUser, notify }) => {
   };
 
   return (
-    <Segment className="login-reg-card">
+    <Segment className="login-reg-card" inverted={isDarkMode}>
       <Header as={isMobile ? 'h3' : 'h2'} textAlign="center">
         <Icon name="signup" />
         Create an account
       </Header>
-      <Form onSubmit={handleRegister} className="auth-form">
+      <Form
+        onSubmit={handleRegister}
+        className={isDarkMode ? 'dark-mode-auth-form auth-form' : 'auth-form'}
+      >
         <Form.Input
           required
           placeholder="For ex. Ben Awad"
