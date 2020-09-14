@@ -45,7 +45,10 @@ const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
       </Dropdown>
     ) : (
       <>
-        <Menu.Item>{`Hi, ${user.displayName}`}</Menu.Item>
+        <Menu.Item>
+          <Icon name="user" />
+          {`Hi, ${user.displayName}`}
+        </Menu.Item>
         <Menu.Item name="Logout" onClick={handleLogout} icon="sign-out" />
       </>
     );
