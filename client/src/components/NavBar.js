@@ -18,7 +18,7 @@ const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
   const handleDarkModeToggle = () => {
     setIsDarkMode(!isDarkMode);
     setIconLoading(true);
-    storageService.saveDarkMode(isDarkMode);
+    storageService.saveDarkMode(!isDarkMode);
     setTimeout(() => setIconLoading(false), 2150);
   };
 
