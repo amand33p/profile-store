@@ -32,19 +32,27 @@ const ContactsDisplay = ({
   return (
     <div className="contacts-display">
       {search !== '' && contactsToDisplay.length !== 0 && (
-        <Header>
+        <Header className={isDarkMode ? 'dark-mode-info-text' : ''}>
           <Icon name="searchengin" />
           Showing search results for query "{search}"
         </Header>
       )}
       {search !== '' && contactsToDisplay.length === 0 && (
-        <Header textAlign="center" as="h2" className="main-text">
+        <Header
+          textAlign="center"
+          as="h2"
+          className={isDarkMode ? 'dark-mode-info-text main-text' : 'main-text'}
+        >
           <Icon name="searchengin" />
           Search: No matches found for "{search}"
         </Header>
       )}
       {!isLoading && search === '' && contactsToDisplay.length === 0 && (
-        <Header textAlign="center" as="h2" className="main-text">
+        <Header
+          textAlign="center"
+          as="h2"
+          className={isDarkMode ? 'dark-mode-info-text main-text' : 'main-text'}
+        >
           <Icon name="info" />
           No contacts added yet.
         </Header>

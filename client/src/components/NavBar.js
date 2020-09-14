@@ -105,7 +105,11 @@ const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
               circular
               loading={iconLoading}
             />
-            <Radio toggle onChange={handleDarkModeToggle} />
+            <Radio
+              toggle
+              onChange={handleDarkModeToggle}
+              checked={isDarkMode}
+            />
           </Menu.Item>
         )}
       </Menu.Menu>

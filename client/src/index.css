@@ -39,6 +39,14 @@ a:hover {
   height: 4em !important;
 }
 
+.nav-bar .menu .item {
+  font-size: 1.2em !important;
+}
+
+.nav-bar .menu a:hover {
+  color: rgb(7, 63, 63) !important;
+}
+
 .nav-title {
   display: flex;
   flex-direction: column;
@@ -127,60 +135,60 @@ a:hover {
 
 .dark-mode-input input {
   background: #1b1c1d !important;
-  color: white !important;
-  border: 1px solid white !important;
+  color: rgb(233, 230, 230) !important;
+  border: 1px solid rgb(233, 230, 230) !important;
 }
 
 .dark-mode-card .content {
   background: #1b1c1d !important;
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-card .content strong {
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-modal {
   background: #1b1c1d !important;
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-modal .header {
   background: #1b1c1d !important;
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-modal .content {
   background: #1b1c1d !important;
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-modal label {
   background: #1b1c1d !important;
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-modal input {
   background: #1b1c1d !important;
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
   border: 1px solid white !important;
 }
 
 .dark-mode-modal .field .dropdown {
   background: #1b1c1d !important;
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
   border: 1px solid white !important;
 }
 
 .dark-mode-modal .field .dropdown i {
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
   border-width: 0 !important;
   border-bottom-width: 1px !important;
 }
 
 .dark-mode-modal .field .dropdown .menu .item {
   background: #1b1c1d !important;
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-modal .field .dropdown .menu .selected {
@@ -193,7 +201,7 @@ a:hover {
 }
 
 .dark-mode-modal i {
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-modal label i {
@@ -205,25 +213,29 @@ a:hover {
 }
 
 .dark-mode-auth-form label {
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-auth-form .header {
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-auth-form input {
   background: #1b1c1d !important;
-  color: white !important;
-  border: 1px solid white !important;
+  color: rgb(233, 230, 230) !important;
+  border: 1px solid rgb(233, 230, 230) !important;
 }
 
 .dark-mode-auth-form i {
-  color: white !important;
+  color: rgb(233, 230, 230) !important;
 }
 
 .dark-mode-auth-form .button i {
   color: black !important;
+}
+
+.dark-mode-info-text {
+  color: rgb(233, 230, 230) !important;
 }
 
 @media only screen and (max-width: 768px) {
