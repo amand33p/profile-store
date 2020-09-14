@@ -13,6 +13,7 @@ const App = () => {
   const [options, setOptions] = useState(optionsArray);
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState('');
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const { addToast: notify } = useToasts();
 
@@ -60,7 +61,12 @@ const App = () => {
 
   return (
     <Container className="container">
-      <NavBar user={user} setUser={setUser} />
+      <NavBar
+        user={user}
+        setUser={setUser}
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+      />
       <Routes
         contacts={contacts}
         setContacts={setContacts}

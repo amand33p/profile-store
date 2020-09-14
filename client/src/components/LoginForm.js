@@ -12,8 +12,13 @@ const LoginForm = ({ setUser, notify }) => {
     email: '',
     password: '',
   });
-  const [error, setError] = useState(null);
+  const [error, setError] = useState({
+    message: `Email: 'test@test.com' & password: 'password'`,
+    title: 'Demo Account Credentials',
+    positive: true,
+  });
   const [isLoading, setIsLoading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
 
   const history = useHistory();
 
@@ -44,9 +49,9 @@ const LoginForm = ({ setUser, notify }) => {
       const errRes = err.response.data;
 
       if (errRes && errRes.error) {
-        return setError(errRes.error);
+        return setError({ message: errRes.error });
       } else {
-        return setError(err.message);
+        return setError({ message: err.message });
       }
     }
   };
@@ -57,8 +62,7 @@ const LoginForm = ({ setUser, notify }) => {
         <Icon name="sign-in" />
         Login to your account
       </Header>
-      <Form onSubmit={handleLogin}>
-        {error && <FormError message={error} setError={setError} />}
+      <Form onSubmit={handleLogin} className="auth-form">
         <Form.Input
           required
           placeholder="For ex. abc@example.com"
@@ -74,12 +78,18 @@ const LoginForm = ({ setUser, notify }) => {
           required
           placeholder="Password must have minimum characters of 6."
           label="Password"
-          type="password"
+          type={showPass ? 'text' : 'password'}
           name="password"
           value={password}
           onChange={handleOnChange}
           icon="lock"
           iconPosition="left"
+          action={
+            password !== '' && {
+              icon: showPass ? 'eye slash' : 'eye',
+              onClick: () => setShowPass(!showPass),
+            }
+          }
         />
 
         <Button
@@ -104,6 +114,14 @@ const LoginForm = ({ setUser, notify }) => {
           Don't have an account? <Link to="/register">Register.</Link>
         </Header>
       </Form>
+      {error && (
+        <FormError
+          message={error.message}
+          title={error.title}
+          positive={error.positive}
+          setError={setError}
+        />
+      )}
     </Segment>
   );
 };

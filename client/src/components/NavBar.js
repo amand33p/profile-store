@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import storageService from '../utils/localStorageHelpers';
 import { useMediaQuery } from 'react-responsive';
-import { Menu, Icon, Dropdown } from 'semantic-ui-react';
+import { Menu, Icon, Dropdown, Radio } from 'semantic-ui-react';
 
-const NavBar = ({ user, setUser }) => {
+const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
+  const [iconLoading, setIconLoading] = useState(false);
   const location = useLocation();
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
@@ -12,6 +13,12 @@ const NavBar = ({ user, setUser }) => {
   const handleLogout = () => {
     setUser(null);
     storageService.logoutUser();
+  };
+
+  const handleDarkModeToggle = () => {
+    setIsDarkMode(!isDarkMode);
+    setIconLoading(true);
+    setTimeout(() => setIconLoading(false), 2150);
   };
 
   const logoutMenu = () => {
@@ -82,6 +89,18 @@ const NavBar = ({ user, setUser }) => {
       </Menu.Item>
       <Menu.Menu position="right">
         {user ? <>{logoutMenu()}</> : <>{loginRegisterMenu()}</>}
+        {!isMobile && (
+          <Menu.Item>
+            <Icon
+              name={isDarkMode ? 'moon' : 'sun'}
+              size="large"
+              color={isDarkMode ? 'blue' : 'yellow'}
+              circular
+              loading={iconLoading}
+            />
+            <Radio toggle onChange={handleDarkModeToggle} />
+          </Menu.Item>
+        )}
       </Menu.Menu>
     </Menu>
   );

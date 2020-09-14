@@ -31,7 +31,7 @@ const ContactsDisplay = ({
   return (
     <div className="contacts-display">
       {search !== '' && contactsToDisplay.length !== 0 && (
-        <Header className="main-text">
+        <Header>
           <Icon name="searchengin" />
           Showing search results for query "{search}"
         </Header>

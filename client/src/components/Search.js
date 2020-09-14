@@ -9,13 +9,21 @@ const Search = ({ search, setSearch }) => {
   return (
     <div className="search-card">
       <Input
+        fluid
+        size="large"
         type="text"
         value={search}
         onChange={handleSearch}
-        placeholder="Search for contact name or profile links"
-        icon={{ name: 'search', circular: true }}
+        placeholder="Search for contact name or profile link"
+        icon={{ name: 'search', color: 'teal' }}
         iconPosition="left"
-        fluid
+        action={
+          search !== '' && {
+            color: 'teal',
+            icon: 'close',
+            onClick: () => setSearch(''),
+          }
+        }
       />
     </div>
   );

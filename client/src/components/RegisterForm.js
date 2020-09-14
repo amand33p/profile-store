@@ -16,6 +16,8 @@ const RegisterForm = ({ setUser, notify }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [showPass, setShowPass] = useState(false);
+  const [showConfirmPass, setShowConfirmPass] = useState(false);
 
   const history = useHistory();
 
@@ -61,8 +63,7 @@ const RegisterForm = ({ setUser, notify }) => {
         <Icon name="signup" />
         Create an account
       </Header>
-      <Form onSubmit={handleRegister}>
-        {error && <FormError message={error} setError={setError} />}
+      <Form onSubmit={handleRegister} className="auth-form">
         <Form.Input
           required
           placeholder="For ex. Ben Awad"
@@ -89,22 +90,34 @@ const RegisterForm = ({ setUser, notify }) => {
           required
           placeholder="Password must have minimum characters of 6."
           label="Password"
-          type="password"
+          type={showPass ? 'text' : 'password'}
           name="password"
           value={password}
           onChange={handleOnChange}
           icon="lock"
           iconPosition="left"
+          action={
+            password !== '' && {
+              icon: showPass ? 'eye slash' : 'eye',
+              onClick: () => setShowPass(!showPass),
+            }
+          }
         />
         <Form.Input
           required
           placeholder="Confirm Password"
           label="Confirm Password"
-          type="password"
+          type={showConfirmPass ? 'text' : 'password'}
           value={confirmPassword}
           onChange={({ target }) => setConfirmPassword(target.value)}
           icon="lock"
           iconPosition="left"
+          action={
+            confirmPassword !== '' && {
+              icon: showConfirmPass ? 'eye slash' : 'eye',
+              onClick: () => setShowConfirmPass(!showConfirmPass),
+            }
+          }
         />
 
         <Button
@@ -129,6 +142,7 @@ const RegisterForm = ({ setUser, notify }) => {
           Already have an account? <Link to="/login">Login.</Link>
         </Header>
       </Form>
+      {error && <FormError message={error} setError={setError} />}
     </Segment>
   );
 };

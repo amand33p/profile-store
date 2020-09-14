@@ -1,11 +1,11 @@
 import React from 'react';
 import { Message, Button } from 'semantic-ui-react';
 
-const FormError = ({ message, setError }) => {
+const FormError = ({ message, setError, title, positive }) => {
   return (
-    <Message negative>
+    <Message negative={positive ? false : true}>
       <Message.Header>
-        Error
+        {title || 'Error'}
         <Button
           icon="close"
           color="red"
