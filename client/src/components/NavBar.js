@@ -25,9 +25,22 @@ const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
   const logoutMenu = () => {
     return isMobile ? (
       <Dropdown item icon="sidebar">
-        <Dropdown.Menu className="navbar-menu">
-          <Dropdown.Item>{`Hi, ${user.displayName}`}</Dropdown.Item>
-          <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+        <Dropdown.Menu className={isDarkMode ? 'dark-mode-menu' : ''}>
+          <Dropdown.Item>
+            <Icon name="user" />
+            <span>{`Hi, ${user.displayName}`}</span>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleLogout}>
+            <Icon name="sign-out" />
+            <span>Logout</span>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleDarkModeToggle}>
+            <Icon
+              name={isDarkMode ? 'moon' : 'sun'}
+              color={isDarkMode ? 'purple' : 'yellow'}
+            />
+            <span>Dark Mode: {isDarkMode ? 'ON' : 'OFF'}</span>
+          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     ) : (
@@ -41,12 +54,21 @@ const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
   const loginRegisterMenu = () => {
     return isMobile ? (
       <Dropdown item icon="sidebar">
-        <Dropdown.Menu>
+        <Dropdown.Menu className={isDarkMode ? 'dark-mode-menu' : ''}>
           <Dropdown.Item as={Link} to="/register">
-            Register
+            <Icon name="signup" />
+            <span>Register</span>
           </Dropdown.Item>
           <Dropdown.Item as={Link} to="/login">
-            Login
+            <Icon name="sign-in" />
+            <span>Login</span>
+          </Dropdown.Item>
+          <Dropdown.Item onClick={handleDarkModeToggle}>
+            <Icon
+              name={isDarkMode ? 'moon' : 'sun'}
+              color={isDarkMode ? 'purple' : 'yellow'}
+            />
+            <span>Dark Mode: {isDarkMode ? 'ON' : 'OFF'}</span>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
