@@ -49,7 +49,7 @@ const App = () => {
 
   useEffect(() => {
     const darkMode = storageService.loadDarkMode();
-    if (darkMode) {
+    if (darkMode === 'true') {
       setIsDarkMode(true);
     }
   }, []);
