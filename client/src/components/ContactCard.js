@@ -4,7 +4,7 @@ import DeleteModal from './DeleteModal';
 import DisplayPictureModal from './DisplayPictureModal';
 import EditContactModal from './EditContactModal';
 import { siteIconsArray, randomColor } from '../utils/arraysAndFuncs';
-
+import { useMediaQuery } from 'react-responsive';
 import { Header, Card, List, Label } from 'semantic-ui-react';
 
 const ContactCard = ({
@@ -16,6 +16,16 @@ const ContactCard = ({
   notify,
   isDarkMode,
 }) => {
+  const isMobile = useMediaQuery({ maxWidth: 767 });
+
+  const linkCharCount = isMobile ? '30' : '70';
+
+  const formattedLink = (link) => {
+    return link.length > linkCharCount
+      ? link.slice(0, linkCharCount).concat('...')
+      : link;
+  };
+
   return (
     <Card fluid className={isDarkMode ? 'dark-mode-card' : ''}>
       <Card.Content>
@@ -77,7 +87,9 @@ const ContactCard = ({
                       c.url.startsWith('http') ? `${c.url}` : `https://${c.url}`
                     }
                   >
-                    {c.url.startsWith('http') ? c.url.split('//')[1] : c.url}
+                    {formattedLink(c.url).startsWith('http')
+                      ? formattedLink(c.url).split('//')[1]
+                      : formattedLink(c.url)}
                   </a>
                   <DeleteModal
                     type="link"
