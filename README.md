@@ -22,7 +22,7 @@ A MERN stack app for storing profile links of people you admire, at one place.
 - [Express.js](https://expressjs.com/) - Node.js framework, makes process of building APIs easier & faster
 - [MongoDB](https://www.mongodb.com/) - Database to store document-based data
 - [Mongoose](https://mongoosejs.com/) - MongoDB object modeling for Node.js
-- [Cloudinary](https://cloudinary.com/) - For image uploads & related API
+- [Cloudinary](https://cloudinary.com/) - For image uploading & related API
 - [JSON Web Token](https://jwt.io/) - A standard to secure/authenticate HTTP requests
 - [Bcrypt.js](https://www.npmjs.com/package/bcryptjs) - For hashing passwords
 - [Validator.js](https://www.npmjs.com/package/validator) - For validation of JSON data
@@ -33,8 +33,9 @@ A MERN stack app for storing profile links of people you admire, at one place.
 
 - Authentication (login/register with email)
 - Image upload for Display Picture of contacts
-- Add/update/delete contacts & changed Display Picture
+- Add/update/delete contacts & change display picture
 - Add/update/delete profile links of individual contacts
+- Click on circular profile image to open preview
 - Search contacts by name or profile links
 - Toast notifications for actions - adding/updating/deleting contact, or welcome message etc.
 - Dark mode toggle w/ local storage save
@@ -44,12 +45,18 @@ A MERN stack app for storing profile links of people you admire, at one place.
 
 #### Desktop/Tablet Home
 
-![Home](https://github.com/amand33p/to-view-list-mern/blob/master/screenshots/desktop-home.png)
+![Home](https://github.com/amand33p/profile-store-mern/blob/master/screenshots/desktop-tablet.png)
 
-#### Auth & Add Entry Form
+#### Auth Forms
 
-![Add entry & auth forms](https://github.com/amand33p/to-view-list-mern/blob/master/screenshots/forms.png)
+![Auth Forms](https://github.com/amand33p/profile-store-mern/blob/master/screenshots/auth-forms.png)
 
-#### Responsive Mobile UI Home
+#### Pop-up windows (modals)
 
-![Responsive Mobile UI w/ FAB](https://github.com/amand33p/to-view-list-mern/blob/master/screenshots/mobile-ui.png)
+![Pop-up windows](https://github.com/amand33p/profile-store-mern/blob/master/screenshots/modals.png)
+
+#### Mobile UI
+
+![Mobile UI - 1](https://github.com/amand33p/profile-store-mern/blob/master/screenshots/mobile-ui-1.png)
+
+![Mobile UI - 2](https://github.com/amand33p/profile-store-mern/blob/master/screenshots/mobile-ui-2.png)
