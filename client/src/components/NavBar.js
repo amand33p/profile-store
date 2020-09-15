@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import storageService from '../utils/localStorageHelpers';
 import { useMediaQuery } from 'react-responsive';
-import { Menu, Icon, Dropdown, Radio } from 'semantic-ui-react';
+import { Menu, Icon, Dropdown } from 'semantic-ui-react';
 
 const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
   const [iconLoading, setIconLoading] = useState(false);
@@ -129,11 +129,8 @@ const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
               color={isDarkMode ? 'purple' : 'yellow'}
               circular
               loading={iconLoading}
-            />
-            <Radio
-              toggle
-              onChange={handleDarkModeToggle}
-              checked={isDarkMode}
+              link
+              onClick={handleDarkModeToggle}
             />
           </Menu.Item>
         )}
