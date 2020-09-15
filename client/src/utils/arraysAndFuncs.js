@@ -15,6 +15,10 @@ export const siteIconsArray = [
   'blogger',
   'linkedin',
   'reddit',
+  'medium',
+  'telegram',
+  'stack overflow',
+  'spotify',
 ];
 
 const labelColors = [

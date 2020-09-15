@@ -60,7 +60,7 @@ const App = () => {
         key: data.value,
         text: data.value,
         value: data.value,
-        icon: 'add circle',
+        icon: 'linkify',
       },
       ...prevState,
     ]);
