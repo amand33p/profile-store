@@ -3,7 +3,7 @@ import { getCircularAvatar } from '../utils/arraysAndFuncs';
 
 import { Header, Modal, Image } from 'semantic-ui-react';
 
-const DisplayPictureModal = ({ imageLink }) => {
+const DisplayPictureModal = ({ imageLink, contactName }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ const DisplayPictureModal = ({ imageLink }) => {
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
     >
-      <Header icon="picture" content="Preview: Display Picture " />
+      <Header icon="picture" content={`DP Preview: ${contactName}`} />
       <Modal.Content>
         <Image
           src={imageLink}

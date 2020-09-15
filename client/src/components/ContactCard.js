@@ -32,7 +32,10 @@ const ContactCard = ({
         <Header className="card-header">
           <div>
             {contact.displayPicture.exists ? (
-              <DisplayPictureModal imageLink={contact.displayPicture.link} />
+              <DisplayPictureModal
+                imageLink={contact.displayPicture.link}
+                contactName={contact.name}
+              />
             ) : (
               <Label
                 circular
