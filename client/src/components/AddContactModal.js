@@ -59,6 +59,7 @@ const AddContactModal = ({
       setUrl('');
       setSite('');
       setDisplayPicture('');
+      setFileName('');
     } catch (err) {
       setIsLoading(false);
       const errRes = err.response.data;

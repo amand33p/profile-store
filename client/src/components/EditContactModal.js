@@ -58,6 +58,7 @@ const EditContactModal = ({ oldName, setContacts, id, notify, isDarkMode }) => {
       });
       handleClose();
       setDisplayPicture('');
+      setFileName('');
     } catch (err) {
       setIsLoading(false);
       const errRes = err.response.data;
