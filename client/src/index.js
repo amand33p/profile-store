@@ -6,7 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastProvider } from 'react-toast-notifications';
 
 ReactDOM.render(
-  <ToastProvider placement="top-center" autoDismiss={true}>
+  <ToastProvider placement="bottom-center" autoDismiss={true}>
     <Router>
       <App />
     </Router>

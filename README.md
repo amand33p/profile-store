@@ -4,7 +4,7 @@ A MERN stack app for storing profile links of people you admire, at one place.
 
 ## Demo
 
-[Deployed on Heroku](https://profile-store.herokuapp.com/)
+[Deployed on Netlify (front-end) & Heroku (back-end)](https://profile-store.netlify.app)
 
 ## Built using
 

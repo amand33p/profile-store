@@ -1,6 +1,7 @@
 import axios from 'axios';
+import backendUrl from '../backendUrl';
 
-const baseUrl = '/api/contacts';
+const baseUrl = `${backendUrl}/api/contacts`;
 
 let token = null;
 

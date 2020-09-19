@@ -69,7 +69,7 @@ const ContactCard = ({
         </Header>
       </Card.Content>
       <Card.Content>
-        <List divided relaxed animated inverted={isDarkMode}>
+        <List divided relaxed animated={!isMobile} inverted={isDarkMode}>
           {contact.contacts.map((c) => (
             <List.Item key={c.id}>
               <List.Icon
