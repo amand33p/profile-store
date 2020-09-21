@@ -266,4 +266,12 @@ router.delete('/:id/url/:urlId', auth, async (req, res) => {
   res.status(204).end();
 });
 
+router.get('/ping', async (_req, res) => {
+  res
+    .status(200)
+    .send(
+      `Backend for Profile Store app by <a href="https://github.com/amand33p" target="_blank">amand33p</>`
+    );
+});
+
 module.exports = router;

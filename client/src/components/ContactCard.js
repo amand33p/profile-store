@@ -35,6 +35,7 @@ const ContactCard = ({
               <DisplayPictureModal
                 imageLink={contact.displayPicture.link}
                 contactName={contact.name}
+                isDarkMode={isDarkMode}
               />
             ) : (
               <Label
