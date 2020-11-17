@@ -89,8 +89,8 @@ a:hover {
 }
 
 .upload-preview {
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
+  display: block;
+  margin: 1.5em auto;
 }
 
 .clear-preview-btn {
