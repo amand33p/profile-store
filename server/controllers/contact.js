@@ -1,16 +1,14 @@
-const router = require('express').Router();
 const Contact = require('../models/contact');
 const User = require('../models/user');
 const validator = require('validator');
-const { auth } = require('../utils/middleware');
 const { cloudinary } = require('../utils/config');
 
-router.get('/', auth, async (req, res) => {
+const getContacts = async (req, res) => {
   const allContacts = await Contact.find({ user: req.user });
   res.json(allContacts);
-});
+};
 
-router.post('/', auth, async (req, res) => {
+const createNewContact = async (req, res) => {
   const { name, contacts, displayPicture } = req.body;
 
   if (!contacts.url || !validator.isURL(contacts.url)) {
@@ -55,9 +53,9 @@ router.post('/', auth, async (req, res) => {
 
   const savedPerson = await newPerson.save();
   return res.status(201).json(savedPerson);
-});
+};
 
-router.delete('/:id', auth, async (req, res) => {
+const deleteContact = async (req, res) => {
   const { id } = req.params;
 
   const user = await User.findById(req.user);
@@ -88,9 +86,9 @@ router.delete('/:id', auth, async (req, res) => {
 
   await Contact.findByIdAndDelete(id);
   res.status(204).end();
-});
+};
 
-router.patch('/:id/name_dp', auth, async (req, res) => {
+const updateContactNameDP = async (req, res) => {
   const { id } = req.params;
   const { name, displayPicture } = req.body;
 
@@ -144,9 +142,9 @@ router.patch('/:id/name_dp', auth, async (req, res) => {
 
   await person.save();
   res.status(202).json(person);
-});
+};
 
-router.post('/:id/url', auth, async (req, res) => {
+const addProfileUrl = async (req, res) => {
   const { id } = req.params;
   const { url, site } = req.body;
 
@@ -186,9 +184,9 @@ router.post('/:id/url', auth, async (req, res) => {
   const savedPerson = await person.save();
 
   res.status(201).json(savedPerson);
-});
+};
 
-router.patch('/:id/url/:urlId', auth, async (req, res) => {
+const updateProfileUrl = async (req, res) => {
   const { id } = req.params;
   const { urlId } = req.params;
   const { url, site } = req.body;
@@ -237,9 +235,9 @@ router.patch('/:id/url/:urlId', auth, async (req, res) => {
 
   await person.save();
   res.status(202).json(urlToUpdate);
-});
+};
 
-router.delete('/:id/url/:urlId', auth, async (req, res) => {
+const deleteProfileUrl = async (req, res) => {
   const { id } = req.params;
   const { urlId } = req.params;
 
@@ -264,14 +262,14 @@ router.delete('/:id/url/:urlId', auth, async (req, res) => {
 
   await person.save();
   res.status(204).end();
-});
+};
 
-router.get('/ping', async (_req, res) => {
-  res
-    .status(200)
-    .send(
-      `Backend for Profile Store app by <a href="https://github.com/amand33p" target="_blank">amand33p</>`
-    );
-});
-
-module.exports = router;
+module.exports = {
+  getContacts,
+  createNewContact,
+  deleteContact,
+  updateContactNameDP,
+  addProfileUrl,
+  deleteProfileUrl,
+  updateProfileUrl,
+};

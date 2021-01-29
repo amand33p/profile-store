@@ -15,7 +15,6 @@
     "mongoose-unique-validator": "^2.0.3",
     "validator": "^13.1.1"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
@@ -23,5 +22,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.18.0"
+  }
 }
