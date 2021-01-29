@@ -19,11 +19,9 @@ const LoginForm = ({ setUser, notify, isDarkMode }) => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
-
   const history = useHistory();
-
-  const { email, password } = credentials;
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { email, password } = credentials;
 
   const handleOnChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -46,9 +44,9 @@ const LoginForm = ({ setUser, notify, isDarkMode }) => {
       history.push('/');
     } catch (err) {
       setIsLoading(false);
-      const errRes = err.response.data;
+      const errRes = err?.response?.data;
 
-      if (errRes && errRes.error) {
+      if (errRes?.error) {
         return setError({ message: errRes.error });
       } else {
         return setError({ message: err.message });

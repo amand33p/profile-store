@@ -37,6 +37,9 @@ a:hover {
 
 .nav-bar {
   height: 4em !important;
+  position: sticky;
+  top: 1px;
+  z-index: 10;
 }
 
 .nav-bar .menu .item {

@@ -18,11 +18,9 @@ const RegisterForm = ({ setUser, notify, isDarkMode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
-
   const history = useHistory();
-
-  const { displayName, email, password } = userDetails;
   const isMobile = useMediaQuery({ maxWidth: 767 });
+  const { displayName, email, password } = userDetails;
 
   const handleOnChange = (e) => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
@@ -47,9 +45,9 @@ const RegisterForm = ({ setUser, notify, isDarkMode }) => {
       history.push('/');
     } catch (err) {
       setIsLoading(false);
-      const errRes = err.response.data;
+      const errRes = err?.response?.data;
 
-      if (errRes && errRes.error) {
+      if (errRes?.error) {
         return setError(errRes.error);
       } else {
         return setError(err.message);

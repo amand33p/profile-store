@@ -61,9 +61,9 @@ const EditContactModal = ({ oldName, setContacts, id, notify, isDarkMode }) => {
       setFileName('');
     } catch (err) {
       setIsLoading(false);
-      const errRes = err.response.data;
+      const errRes = err?.response?.data;
 
-      if (errRes && errRes.error) {
+      if (errRes?.error) {
         return setError(errRes.error);
       } else {
         return setError(err.message);
