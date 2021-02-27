@@ -65,7 +65,7 @@ A MERN stack app for storing profile links of people you admire, at one place.
 
 #### Env variable:
 
-Note: Make account at cloudinary.com & get related API info. from your account dashboard.
+Note: For image API, make account at cloudinary.com & get API keys from account dashboard.
 
 Create a .env file in server directory and add the following:
 
@@ -88,7 +88,7 @@ npm start
 
 #### Server:
 
-Note: Make sure that you have 'nodemon' installed globally.
+Note: Make sure that you have installed 'nodemon' as global package.
 
 ```
 cd server
