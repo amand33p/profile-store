@@ -80,6 +80,8 @@ CLOUDINARY_API_SECRET = "From your cloudinary dashboard"
 
 #### Client:
 
+Open client/src/backendUrl.js & change "backend" variable to "https://localhost:3005"
+
 ```
 cd client
 npm install
