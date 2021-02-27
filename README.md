@@ -63,6 +63,21 @@ A MERN stack app for storing profile links of people you admire, at one place.
 
 ## Usage for development
 
+#### Env variable:
+
+Note: Make account at cloudinary.com & get related API info. from your account dashboard.
+
+Create a .env file in server directory and add the following:
+
+```
+MONGODB_URI = "Your Mongo URI"
+PORT = 3005
+SECRET = "Your JWT secret"
+CLOUDINARY_NAME = "From your cloudinary dashboard"
+CLOUDINARY_API_KEY = "From your cloudinary dashboard"
+CLOUDINARY_API_SECRET = "From your cloudinary dashboard"
+```
+
 #### Client:
 
 ```
@@ -79,19 +94,4 @@ Note: Make sure that you have 'nodemon' installed globally.
 cd server
 npm install
 npm run dev
-```
-
-#### Env variable:
-
-Note: Make account at cloudinary.com & get related API info. from your account dashboard.
-
-Create a .env file in server directory and add the following:
-
-```
-MONGODB_URI = "Your Mongo URI"
-PORT = 3005
-SECRET = "Your JWT secret"
-CLOUDINARY_NAME = "From your cloudinary dashboard"
-CLOUDINARY_API_KEY = "From your cloudinary dashboard"
-CLOUDINARY_API_SECRET = "From your cloudinary dashboard"
 ```
