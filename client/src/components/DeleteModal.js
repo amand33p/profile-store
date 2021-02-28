@@ -102,8 +102,8 @@ const DeleteModal = ({
       <Modal.Content>
         <p>
           {isTypeContact
-            ? `Are you sure want to delete contact named as '${contact.name}'?`
-            : `Are you sure want to delete ${urlName} link '${urlLink}'?`}
+            ? `Are you sure you want to delete contact named as '${contact.name}'?`
+            : `Are you sure you want to delete ${urlName} link '${urlLink}'?`}
         </p>
       </Modal.Content>
       <Modal.Actions>

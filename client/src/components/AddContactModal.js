@@ -94,7 +94,6 @@ const AddContactModal = ({
           labelPosition="left"
           fluid={isMobile}
           size={isMobile ? 'medium' : 'large'}
-          className={isMobile ? '' : 'add-contact-btn'}
         >
           <Icon name="add user" />
           Add New Contact
@@ -170,7 +169,11 @@ const AddContactModal = ({
             <Button
               onClick={clearfileSelection}
               size="small"
-              className="clear-preview-btn"
+              className={
+                isDarkMode
+                  ? 'clear-preview-btn dark-mode-clear-btn'
+                  : 'clear-preview-btn'
+              }
             >
               <Icon name="remove circle" />
               Un-select Image
