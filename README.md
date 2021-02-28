@@ -31,11 +31,10 @@ A MERN stack app for storing profile links of people you admire, at one place.
 
 ## Features
 
-- Authentication (login/register with email)
-- Image upload for Display Picture of contacts
+- Authentication (login/register with email-password)
+- Upload images for display pictures of contacts
 - Add/update/delete contacts & change display picture
 - Add/update/delete profile links of individual contacts
-- Click on circular profile image to open preview
 - Search contacts by name or profile links
 - Toast notifications for actions - adding/updating/deleting contact, or welcome message etc.
 - Dark mode toggle w/ local storage save
