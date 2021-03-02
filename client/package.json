@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy-nl": "rm -rf build && npm run build && netlify deploy --prod"
+    "predeploy": "rm -rf build && npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"

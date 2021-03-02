@@ -60,7 +60,7 @@ A MERN stack app for storing profile links of people you admire, at one place.
 
 ![Mobile UI - 2](https://github.com/amand33p/profile-store-mern/blob/master/screenshots/mobile-ui-2.png)
 
-## Development usage
+## Usage
 
 #### Env variable:
 
