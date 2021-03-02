@@ -27,11 +27,11 @@ code {
 }
 
 a {
-  color: rgb(3, 63, 63);
+  color: #009c95;
 }
 
 a:hover {
-  color: rgb(5, 168, 168);
+  color: #06746e;
   filter: brightness(60%);
 }
 
@@ -46,10 +46,6 @@ a:hover {
   font-size: 1.2em !important;
 }
 
-.nav-bar .menu a:hover {
-  color: rgb(7, 63, 63) !important;
-}
-
 .nav-title {
   display: flex;
   flex-direction: column;
@@ -60,6 +56,14 @@ a:hover {
   font-size: 1.3em;
   margin-bottom: 0.2em;
   align-self: flex-start;
+}
+
+.nav-link {
+  color: rgb(9, 85, 85);
+}
+
+.nav-link:hover {
+  color: rgba(9, 85, 85, 50);
 }
 
 .name-header {
@@ -229,7 +233,7 @@ a:hover {
   color: rgb(233, 230, 230) !important;
 }
 
-.dark-mode-auth-form .button i {
+.dark-mode-auth-form .input .button i {
   color: black !important;
 }
 

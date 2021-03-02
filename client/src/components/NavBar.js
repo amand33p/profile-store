@@ -114,6 +114,7 @@ const NavBar = ({ user, setUser, isDarkMode, setIsDarkMode }) => {
             href="https://github.com/amand33p"
             target="_blank"
             rel="noopener noreferrer"
+            className="nav-link"
           >
             amand33p
           </a>
