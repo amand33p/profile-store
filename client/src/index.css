@@ -46,6 +46,10 @@ a:hover {
   font-size: 1.2em !important;
 }
 
+.nav-bar .menu a:hover {
+  color: rgb(7, 63, 63) !important;
+}
+
 .nav-title {
   display: flex;
   flex-direction: column;

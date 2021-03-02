@@ -52,83 +52,81 @@ const LoginForm = ({ setUser, notify, isDarkMode }) => {
   };
 
   return (
-    <div>
-      <Segment
-        className={
-          isDarkMode ? 'login-reg-card dark-mode-segment' : 'login-reg-card'
-        }
-        inverted={isDarkMode}
+    <Segment
+      className={
+        isDarkMode ? 'login-reg-card dark-mode-segment' : 'login-reg-card'
+      }
+      inverted={isDarkMode}
+    >
+      <Header as={isMobile ? 'h3' : 'h2'} textAlign="center">
+        <Icon name="sign-in" />
+        Login to your account
+      </Header>
+      <Form
+        onSubmit={handleLogin}
+        className={isDarkMode ? 'dark-mode-auth-form auth-form' : 'auth-form'}
       >
-        <Header as={isMobile ? 'h3' : 'h2'} textAlign="center">
-          <Icon name="sign-in" />
-          Login to your account
-        </Header>
-        <Form
-          onSubmit={handleLogin}
-          className={isDarkMode ? 'dark-mode-auth-form auth-form' : 'auth-form'}
-        >
-          <Form.Input
-            required
-            placeholder="For ex. abc@example.com"
-            label="Email"
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleOnChange}
-            icon="at"
-            iconPosition="left"
-          />
-          <Form.Input
-            required
-            placeholder="Password must have minimum characters of 6."
-            label="Password"
-            type={showPass ? 'text' : 'password'}
-            name="password"
-            value={password}
-            onChange={handleOnChange}
-            icon="lock"
-            iconPosition="left"
-            action={
-              password !== '' && {
-                icon: showPass ? 'eye slash' : 'eye',
-                onClick: () => setShowPass(!showPass),
-              }
+        <Form.Input
+          required
+          placeholder="For ex. abc@example.com"
+          label="Email"
+          type="email"
+          name="email"
+          value={email}
+          onChange={handleOnChange}
+          icon="at"
+          iconPosition="left"
+        />
+        <Form.Input
+          required
+          placeholder="Password must have minimum characters of 6."
+          label="Password"
+          type={showPass ? 'text' : 'password'}
+          name="password"
+          value={password}
+          onChange={handleOnChange}
+          icon="lock"
+          iconPosition="left"
+          action={
+            password !== '' && {
+              icon: showPass ? 'eye slash' : 'eye',
+              onClick: () => setShowPass(!showPass),
             }
-          />
+          }
+        />
 
-          <Button
-            animated="vertical"
-            color="teal"
-            icon
-            labelPosition="left"
-            type="submit"
-            floated="right"
-            loading={isLoading}
-            size={isMobile ? 'small' : 'large'}
-            fluid={isMobile}
-          >
-            <Icon name="sign-in" />
-            Login
-          </Button>
-          <Header
-            as="h4"
-            textAlign={isMobile ? 'center' : 'left'}
-            className="login-reg-bottom-text"
-          >
-            Don't have an account? <Link to="/register">Register.</Link>
-          </Header>
-        </Form>
-        {error && (
-          <FormError
-            message={error.message}
-            title={error.title}
-            positive={error.positive}
-            setError={setError}
-          />
-        )}
-      </Segment>
+        <Button
+          animated="vertical"
+          color="teal"
+          icon
+          labelPosition="left"
+          type="submit"
+          floated="right"
+          loading={isLoading}
+          size={isMobile ? 'small' : 'large'}
+          fluid={isMobile}
+        >
+          <Icon name="sign-in" />
+          Login
+        </Button>
+        <Header
+          as="h4"
+          textAlign={isMobile ? 'center' : 'left'}
+          className="login-reg-bottom-text"
+        >
+          Don't have an account? <Link to="/register">Register.</Link>
+        </Header>
+      </Form>
+      {error && (
+        <FormError
+          message={error.message}
+          title={error.title}
+          positive={error.positive}
+          setError={setError}
+        />
+      )}
       <DemoCredsInfo />
-    </div>
+    </Segment>
   );
 };
 
