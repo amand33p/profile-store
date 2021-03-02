@@ -229,8 +229,13 @@ a:hover {
   border: 1px solid rgb(233, 230, 230) !important;
 }
 
-.dark-mode-auth-form i {
+.dark-mode-auth-form .input i {
   color: rgb(233, 230, 230) !important;
+}
+
+.dark-mode-auth-form input:autofill {
+  color: #1b1c1d !important;
+  border: 1px solid rgb(233, 230, 230) !important;
 }
 
 .dark-mode-auth-form .input .button i {
@@ -251,6 +256,10 @@ a:hover {
 
 .dark-mode-menu .item * {
   color: rgb(233, 230, 230) !important;
+}
+
+.dark-mode-segment {
+  border: 1px solid rgb(233, 230, 230) !important;
 }
 
 @media only screen and (max-width: 768px) {

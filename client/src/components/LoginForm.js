@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import FormError from './FormError';
+import DemoCredsInfo from './DemoCredsInfo';
 import contactService from '../services/contacts';
 import authService from '../services/auth';
 import storageService from '../utils/localStorageHelpers';
@@ -12,11 +13,7 @@ const LoginForm = ({ setUser, notify, isDarkMode }) => {
     email: '',
     password: '',
   });
-  const [error, setError] = useState({
-    message: `Email: 'test@test.com' & password: 'password'`,
-    title: 'Demo Account Credentials',
-    positive: true,
-  });
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
   const history = useHistory();
@@ -55,75 +52,83 @@ const LoginForm = ({ setUser, notify, isDarkMode }) => {
   };
 
   return (
-    <Segment className="login-reg-card" inverted={isDarkMode}>
-      <Header as={isMobile ? 'h3' : 'h2'} textAlign="center">
-        <Icon name="sign-in" />
-        Login to your account
-      </Header>
-      <Form
-        onSubmit={handleLogin}
-        className={isDarkMode ? 'dark-mode-auth-form auth-form' : 'auth-form'}
+    <div>
+      <Segment
+        className={
+          isDarkMode ? 'login-reg-card dark-mode-segment' : 'login-reg-card'
+        }
+        inverted={isDarkMode}
       >
-        <Form.Input
-          required
-          placeholder="For ex. abc@example.com"
-          label="Email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleOnChange}
-          icon="at"
-          iconPosition="left"
-        />
-        <Form.Input
-          required
-          placeholder="Password must have minimum characters of 6."
-          label="Password"
-          type={showPass ? 'text' : 'password'}
-          name="password"
-          value={password}
-          onChange={handleOnChange}
-          icon="lock"
-          iconPosition="left"
-          action={
-            password !== '' && {
-              icon: showPass ? 'eye slash' : 'eye',
-              onClick: () => setShowPass(!showPass),
-            }
-          }
-        />
-
-        <Button
-          animated="vertical"
-          color="teal"
-          icon
-          labelPosition="left"
-          type="submit"
-          floated="right"
-          loading={isLoading}
-          size={isMobile ? 'small' : 'large'}
-          fluid={isMobile}
-        >
+        <Header as={isMobile ? 'h3' : 'h2'} textAlign="center">
           <Icon name="sign-in" />
-          Login
-        </Button>
-        <Header
-          as="h4"
-          textAlign={isMobile ? 'center' : ''}
-          className="login-reg-bottom-text"
-        >
-          Don't have an account? <Link to="/register">Register.</Link>
+          Login to your account
         </Header>
-      </Form>
-      {error && (
-        <FormError
-          message={error.message}
-          title={error.title}
-          positive={error.positive}
-          setError={setError}
-        />
-      )}
-    </Segment>
+        <Form
+          onSubmit={handleLogin}
+          className={isDarkMode ? 'dark-mode-auth-form auth-form' : 'auth-form'}
+        >
+          <Form.Input
+            required
+            placeholder="For ex. abc@example.com"
+            label="Email"
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleOnChange}
+            icon="at"
+            iconPosition="left"
+          />
+          <Form.Input
+            required
+            placeholder="Password must have minimum characters of 6."
+            label="Password"
+            type={showPass ? 'text' : 'password'}
+            name="password"
+            value={password}
+            onChange={handleOnChange}
+            icon="lock"
+            iconPosition="left"
+            action={
+              password !== '' && {
+                icon: showPass ? 'eye slash' : 'eye',
+                onClick: () => setShowPass(!showPass),
+              }
+            }
+          />
+
+          <Button
+            animated="vertical"
+            color="teal"
+            icon
+            labelPosition="left"
+            type="submit"
+            floated="right"
+            loading={isLoading}
+            size={isMobile ? 'small' : 'large'}
+            fluid={isMobile}
+          >
+            <Icon name="sign-in" />
+            Login
+          </Button>
+          <Header
+            as="h4"
+            textAlign={isMobile ? 'center' : 'left'}
+            className="login-reg-bottom-text"
+          >
+            Don't have an account? <Link to="/register">Register.</Link>
+          </Header>
+        </Form>
+        {error && (
+          <FormError
+            message={error.message}
+            title={error.title}
+            positive={error.positive}
+            setError={setError}
+          />
+        )}
+      </Segment>
+      <DemoCredsInfo />
+    </div>
   );
 };
 
