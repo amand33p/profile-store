@@ -79,7 +79,7 @@ const ContactCard = ({
                     ? c.site.toLowerCase()
                     : 'linkify'
                 }
-                color={isDarkMode ? 'white' : 'black'}
+                color={isDarkMode ? null : 'black'}
                 size="big"
               />
               <List.Content>

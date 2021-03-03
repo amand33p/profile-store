@@ -127,7 +127,6 @@ const AddContactModal = ({
             icon="linkify"
             iconPosition="left"
           />
-
           <Form.Select
             required
             value={site}
@@ -136,11 +135,7 @@ const AddContactModal = ({
             allowAdditions
             selection
             search
-            placeholder={
-              <div>
-                <Icon name="globe" color="black" /> Select a site
-              </div>
-            }
+            placeholder="Select a site"
             onAddItem={handleOptionAddition}
             onChange={(e, data) => setSite(data.value)}
           />

@@ -75,11 +75,12 @@ SECRET = "Your JWT secret"
 CLOUDINARY_NAME = "From your cloudinary dashboard"
 CLOUDINARY_API_KEY = "From your cloudinary dashboard"
 CLOUDINARY_API_SECRET = "From your cloudinary dashboard"
+UPLOAD_PRESET = "Folder/preset name where you want to save uploaded images (optional)"
 ```
 
 #### Client:
 
-Open client/src/backendUrl.js & change "backend" variable to `"https://localhost:3005"`
+Open client/src/backendUrl.js & change "backend" variable to `"http://localhost:3005"`
 
 ```
 cd client

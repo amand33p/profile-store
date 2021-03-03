@@ -1,7 +1,7 @@
 const Contact = require('../models/contact');
 const User = require('../models/user');
 const validator = require('validator');
-const { cloudinary } = require('../utils/config');
+const { cloudinary, UPLOAD_PRESET } = require('../utils/config');
 
 const getContacts = async (req, res) => {
   const allContacts = await Contact.find({ user: req.user });
@@ -37,7 +37,7 @@ const createNewContact = async (req, res) => {
     const uploadedImage = await cloudinary.uploader.upload(
       displayPicture,
       {
-        upload_preset: 'profile-store',
+        upload_preset: UPLOAD_PRESET,
       },
       (error) => {
         if (error) return res.status(401).send({ error: error.message });
@@ -117,7 +117,7 @@ const updateContactNameDP = async (req, res) => {
     const uploadedImage = await cloudinary.uploader.upload(
       displayPicture,
       {
-        upload_preset: 'profile-store',
+        upload_preset: UPLOAD_PRESET,
       },
       (error) => {
         if (error) return res.status(401).send({ error: error.message });

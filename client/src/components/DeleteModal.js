@@ -86,10 +86,10 @@ const DeleteModal = ({
             isTypeContact ? (isMobile ? undefined : 'Delete') : undefined
           }
           icon={isTypeContact ? 'user delete' : 'delete'}
-          color={isTypeContact ? 'red' : ''}
+          color={isTypeContact ? 'red' : null}
           size={isTypeContact ? (isMobile ? 'mini' : 'medium') : 'tiny'}
           className={isTypeContact ? 'contact-del-btn' : 'delete-btn'}
-          floated={isTypeContact ? '' : 'right'}
+          floated={isTypeContact ? null : 'right'}
           compact
         />
       }

@@ -116,7 +116,7 @@ const LinkFormModal = ({
       open={modalOpen}
       trigger={
         <Button
-          color={isTypeEdit ? '' : 'green'}
+          color={isTypeEdit ? null : 'green'}
           size={isTypeEdit ? 'tiny' : isMobile ? 'mini' : 'small'}
           floated={isTypeEdit ? 'right' : 'left'}
           icon={isTypeEdit ? 'edit' : 'add'}
@@ -154,11 +154,7 @@ const LinkFormModal = ({
             allowAdditions
             selection
             search
-            placeholder={
-              <div>
-                <Icon name="globe" color="black" /> Select a site
-              </div>
-            }
+            placeholder="Select a site"
             onChange={(e, data) => setSite(data.value)}
             onAddItem={handleOptionAddition}
           />
