@@ -62,11 +62,14 @@ A MERN stack app for storing profile links of people you admire, at one place.
 
 ## Usage
 
+Notes:
+
+- For image API, make account at cloudinary.com & get API keys from account dashboard.
+- For upload preset usage, if you want to organize images separately at cloudinary.com, you have to create it from account settings first. If you don't want to, don't put anything in .ENV key, `UPLOAD_PRESET`.
+
 #### Env variable:
 
-Note: For image API, make account at cloudinary.com & get API keys from account dashboard.
-
-Create a .env file in server directory and add the following:
+Create .env file in server directory and add the following:
 
 ```
 MONGODB_URI = "Your Mongo URI"
@@ -75,7 +78,7 @@ SECRET = "Your JWT secret"
 CLOUDINARY_NAME = "From your cloudinary dashboard"
 CLOUDINARY_API_KEY = "From your cloudinary dashboard"
 CLOUDINARY_API_SECRET = "From your cloudinary dashboard"
-UPLOAD_PRESET = "Folder/preset name where you want to save uploaded images (optional)"
+UPLOAD_PRESET = "Folder/preset name from your cloudinary account" (OPTIONAL)
 ```
 
 #### Client:
