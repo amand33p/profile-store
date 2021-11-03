@@ -13,7 +13,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.25",
     "mongoose-unique-validator": "^2.0.3",
-    "validator": "^13.1.1"
+    "validator": "^13.7.0"
   },
   "scripts": {
     "start": "node index.js",
