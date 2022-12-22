@@ -10,7 +10,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.9.25",
     "mongoose-unique-validator": "^2.0.3",
     "validator": "^13.1.1"
